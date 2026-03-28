@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ContactModal from '../components/ContactModal'
 
-const PROJECTS = [
+const MAIN_PROJECTS = [
   {
     id: 'herculabs',
     title: 'Herculabs',
@@ -32,18 +32,17 @@ const PROJECTS = [
     internal: true,
     href: '/projects/babycircle',
   },
+]
+
+const SIDE_PROJECTS = [
   {
     id: 'muafakat',
     title: 'Muafakat Website',
     subtitle: 'Website Designer & Developer - Figma, HTML, CSS, JavaScript',
     para: 'Malaysian Sport Competition Website | Muafakat | 2024',
     img: '/assets/Muafakat.png',
-    internal: false,
-    href: 'https://www.muafakatgames2024.com/',
-    links: [
-      { icon: 'fas fa-link', href: 'https://www.muafakatgames2024.com/' },
-      { icon: 'fab fa-github', href: 'https://github.com/cubelemon/Muafakat' },
-    ],
+    internal: true,
+    href: '/projects/muafakat',
   },
   {
     id: 'movieplug',
@@ -51,12 +50,8 @@ const PROJECTS = [
     subtitle: 'Frontend Developer - Figma, HTML, CSS, JavaScript, API',
     para: 'Movie Finder Website | FrontEnd Simplified | 2024',
     img: '/assets/Movie_plug.png',
-    internal: false,
-    href: 'https://cubelemon.github.io/JavaScript-Final-Project/',
-    links: [
-      { icon: 'fas fa-link', href: 'https://cubelemon.github.io/JavaScript-Final-Project/' },
-      { icon: 'fab fa-github', href: 'https://github.com/cubelemon/JavaScript-Final-Project' },
-    ],
+    internal: true,
+    href: '/projects/movieplug',
   },
 ]
 
@@ -165,10 +160,18 @@ export default function Home() {
               Here are some of my <span className="text--orange">Projects</span>
             </h1>
             <ul className="project__list">
-              {PROJECTS.map((project) => (
+              {MAIN_PROJECTS.map((project) => (
                 <ProjectCard key={project.id} project={project} />
               ))}
             </ul>
+            <div className="side-projects">
+              <h2 className="side-projects__title">Side Projects</h2>
+              <ul className="project__list project__list--side">
+                {SIDE_PROJECTS.map((project) => (
+                  <ProjectCard key={project.id} project={project} side />
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -211,11 +214,11 @@ export default function Home() {
   )
 }
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, side }) {
   const { title, subtitle, para, img, internal, href, links } = project
 
   const inner = (
-    <li className="project">
+    <li className={`project${side ? ' project--side' : ''}`}>
       <div className="project__wrapper">
         <img src={img} className="project__img" alt={title} />
         <div className="project__wrapper--bg"></div>

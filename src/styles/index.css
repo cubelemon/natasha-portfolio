@@ -1602,6 +1602,147 @@ Small phone
   display: block;
 }
 
+/* ── Tablet mockup grid ──────────────────────────────── */
+.cs-tablet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+  padding: 0 2rem;
+}
+
+.cs-tablet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* The device chrome */
+.cs-tablet__frame {
+  width: 100%;
+  background: #1a1a2e;
+  border-radius: 18px;
+  padding: 10px 12px 16px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Front camera dot */
+.cs-tablet__camera {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+/* The display area — 16:10 landscape */
+.cs-tablet__screen {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #0d0d1a;
+}
+
+.cs-tablet__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cs-tablet__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 2rem;
+}
+
+/* Home pill */
+.cs-tablet__home {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.18);
+  flex-shrink: 0;
+}
+
+.cs-tablet__label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #555;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.dark-theme .cs-tablet__label {
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .cs-tablet-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+}
+
+/* ── GIF strip (plain white, no frame) ──────────────── */
+.cs-gif-strip {
+  width: 100%;
+  background: #fff;
+  padding: 60px 2rem;
+  margin-bottom: 1rem;
+}
+
+.cs-gif-strip__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr 1fr;
+  gap: 16px;
+}
+
+.cs-gif-strip__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cs-gif-strip__img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  border-radius: 8px;
+}
+
+.cs-gif-strip__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #888;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .cs-gif-strip__grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+}
+
 /* Case study content sections */
 .cs-section {
   max-width: 800px;
@@ -1859,5 +2000,1146 @@ Small phone
 
   .case-study-hero__meta {
     gap: 1rem;
+  }
+}
+
+/* ── Herculabs — Quote ───────────────────────────────── */
+.cs-quote {
+  margin: 2rem 0;
+  padding: 1.25rem 1.75rem;
+  border-left: 4px solid #3841D8;
+  background: rgba(56, 65, 216, 0.05);
+  border-radius: 0 8px 8px 0;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: #444;
+}
+
+/* ── Herculabs — Bullet List ─────────────────────────── */
+.cs-bullet-list {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.cs-bullet-list li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* ── Herculabs — Stats ───────────────────────────────── */
+.cs-stat-row {
+  display: flex;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.cs-stat {
+  flex: 1;
+  min-width: 180px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cs-stat--muted .cs-stat__num {
+  color: #aaa;
+}
+
+.cs-stat__num {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.cs-stat__label {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* ── Herculabs — Concepts ────────────────────────────── */
+.cs-concepts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cs-concept-card {
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cs-concept-card--winner {
+  border-color: #3841D8;
+  background: rgba(56, 65, 216, 0.04);
+  padding: 1.5rem 1.75rem;
+}
+
+.cs-concept-card__medal {
+  font-size: 1.5rem;
+}
+
+.cs-concept-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.cs-concept-card--winner .cs-concept-card__title {
+  color: #3841D8;
+  font-size: 1.2rem;
+}
+
+.cs-concept-card__desc {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.cs-concept-card__reasons {
+  margin-top: 0.75rem;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cs-concept-card__reasons li {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* ── Herculabs — Timeline ────────────────────────────── */
+.cs-timeline-scroll {
+  width: 100%;
+  overflow-x: auto;
+  padding: 2rem 0 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #3841D8 #eee;
+}
+
+.cs-timeline-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.cs-timeline-scroll::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 4px;
+}
+
+.cs-timeline-scroll::-webkit-scrollbar-thumb {
+  background: #3841D8;
+  border-radius: 4px;
+}
+
+.cs-timeline-track {
+  display: flex;
+  align-items: flex-start; /* steps all start from the same top edge */
+  min-width: max-content;
+  padding: 0 1rem;
+  position: relative;
+}
+
+/*
+  Line top calculation:
+    week label area  = 28px (fixed height)
+    gap below week   = 10px (margin-bottom)
+    dot radius       = 6px  (dot is 12px tall)
+    ─────────────────────────
+    dot center       = 44px from step top
+*/
+.cs-timeline-track::before {
+  content: '';
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, #3841D8, #F59BBB, #FCEABB, #3841D8);
+}
+
+.cs-timeline-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 110px;
+  text-align: center;
+  padding: 0 0.5rem;
+  opacity: 0;
+  animation: cs-timeline-fadein 0.4s ease forwards;
+}
+
+@keyframes cs-timeline-fadein {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.cs-timeline-step__week {
+  /* fixed height so every dot lands at the same vertical position */
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #3841D8;
+}
+
+.cs-timeline-step__dot {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0; /* never squish */
+  border-radius: 50%;
+  background: #3841D8;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px #3841D8;
+  position: relative;
+  z-index: 1;
+}
+
+.cs-timeline-step__label {
+  font-size: 0.78rem;
+  color: #555;
+  margin-top: 10px;
+  line-height: 1.3;
+  max-width: 90px;
+}
+
+/* ── Herculabs — Image labels ────────────────────────── */
+.cs-img-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Herculabs — Changes Grid ────────────────────────── */
+/* ── Notable Changes — before/after cards ─────────────── */
+.cs-notable-changes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cs-notable-change {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.cs-notable-change__header {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.cs-notable-change__num {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #3841D8;
+  background: rgba(56, 65, 216, 0.08);
+  border-radius: 6px;
+  padding: 0.3rem 0.55rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.cs-notable-change__title {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.3rem;
+}
+
+.cs-notable-change__body {
+  font-size: 0.88rem;
+  color: #666;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Before / after image pair */
+.cs-notable-change__images {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cs-notable-change__img-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cs-notable-change__img-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.cs-notable-change__img-tag--before {
+  color: #aaa;
+}
+
+.cs-notable-change__img-tag--after {
+  color: #3841D8;
+}
+
+.cs-notable-change__img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f0f0f0;
+  display: block;
+  /* shows a grey box while the image path is a placeholder */
+  min-height: 80px;
+}
+
+.cs-notable-change__arrow {
+  font-size: 1.25rem;
+  color: #ccc;
+  flex-shrink: 0;
+  line-height: 1;
+  align-self: center;
+  margin-top: 1.2rem; /* offset for the tag label above images */
+}
+
+/* Plain white container — single full-width */
+.cs-notable-change__single-wrap {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Plain white container — each side of a before/after pair */
+.cs-notable-change__white-wrap {
+  background: #fff;
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+/* Shared image style */
+.cs-notable-change__plain-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+
+/* ── Herculabs — Booth Flow ──────────────────────────── */
+.cs-booth-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.cs-booth-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  width: 0; /* equal widths via flex */
+}
+
+.cs-booth-step__arrow {
+  font-size: 1.25rem;
+  color: #ccc;
+  flex-shrink: 0;
+  margin: 0 0.25rem;
+  /* nudge up to visually align with icon centers */
+  margin-bottom: 3.5rem;
+}
+
+.cs-booth-step__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(56, 65, 216, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #3841D8;
+  margin-bottom: 0.75rem;
+}
+
+.cs-booth-step__label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.cs-booth-step__desc {
+  font-size: 0.8rem;
+  color: #777;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ── Dark theme overrides ────────────────────────────── */
+.dark-theme .cs-quote {
+  background: rgba(56, 65, 216, 0.1);
+  color: #ccc;
+}
+
+.dark-theme .cs-bullet-list li {
+  color: #bbb;
+}
+
+.dark-theme .cs-stat {
+  background: #2a2a2a;
+}
+
+.dark-theme .cs-stat__label {
+  color: #aaa;
+}
+
+.dark-theme .cs-concept-card {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.dark-theme .cs-concept-card--winner {
+  background: rgba(56, 65, 216, 0.1);
+  border-color: #3841D8;
+}
+
+.dark-theme .cs-concept-card__title {
+  color: #eee;
+}
+
+.dark-theme .cs-concept-card__desc,
+.dark-theme .cs-concept-card__reasons li {
+  color: #aaa;
+}
+
+.dark-theme .cs-notable-change {
+  background: #1e1e2e;
+  border-color: #333;
+}
+
+.dark-theme .cs-notable-change__title {
+  color: #eee;
+}
+
+.dark-theme .cs-notable-change__body {
+  color: #aaa;
+}
+
+.dark-theme .cs-notable-change__img {
+  background: #2a2a2a;
+}
+
+.dark-theme .cs-timeline-step__label {
+  color: #aaa;
+}
+
+.dark-theme .cs-booth-step__label {
+  color: #eee;
+}
+
+.dark-theme .cs-booth-step__desc {
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .cs-stat-row {
+    flex-direction: column;
+  }
+
+  .cs-notable-change__images {
+    flex-direction: column;
+  }
+
+  .cs-notable-change__arrow {
+    transform: rotate(90deg);
+    margin-top: 0;
+  }
+
+  .cs-booth-flow {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cs-booth-step {
+    width: auto;
+  }
+
+  .cs-booth-step__arrow {
+    transform: rotate(90deg);
+    margin: 0.25rem 0;
+    margin-bottom: 0.25rem;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   RAJANG CASE STUDY
+   ══════════════════════════════════════════════════════ */
+
+/* ── Info bar (shared) ───────────────────────────────── */
+.rj-info-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  padding: 1.75rem 2rem;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+}
+
+.rj-info-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.rj-info-col__label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #0c9590;
+}
+
+.rj-info-col__value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.3;
+}
+
+.rj-info-divider {
+  width: 1px;
+  height: 40px;
+  background: #e0e0e0;
+  flex-shrink: 0;
+}
+
+/* ── Moodboard card (dark green rounded) ─────────────── */
+.rj-moodboard-card {
+  background: #0f2d1f;
+  border-radius: 16px;
+  padding: 2.5rem;
+}
+
+.rj-moodboard-card__title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.rj-moodboard-card__subtitle {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.rj-moodboard-card__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.rj-moodboard-card__body {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.7;
+  font-size: 0.97rem;
+}
+
+/* ── Large section title ─────────────────────────────── */
+.rj-large-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Teal gradient highlight bar ─────────────────────── */
+.rj-highlight-bar {
+  background: linear-gradient(135deg, #0c9590 0%, rgba(12, 149, 144, 0.25) 100%);
+  border-radius: 12px;
+  padding: 1.25rem 1.75rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #fff;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* ── Sticky notes ────────────────────────────────────── */
+.rj-sticky-notes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.75rem 0;
+}
+
+.rj-sticky-note {
+  background: #fff9c4;
+  border-radius: 8px;
+  padding: 1.5rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.rj-sticky-note__pin {
+  font-size: 1.25rem;
+}
+
+.rj-sticky-note__text {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+/* ── Smart content card (dark charcoal, Section 4) ───── */
+.rj-smart-card {
+  background: #1c1e24;
+  border-radius: 16px;
+  padding: 2.5rem;
+}
+
+.rj-smart-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.rj-smart-card__title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.rj-smart-card__emoji {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.rj-smart-card__body {
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.rj-smart-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.rj-smart-list-item {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  gap: 0.875rem;
+  align-items: flex-start;
+}
+
+.rj-smart-list-item__icon {
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rj-smart-list-item__title {
+  display: block;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.rj-smart-list-item__body {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── Mistake section ─────────────────────────────────── */
+.rj-mistake-icon {
+  margin-right: 0.4rem;
+  font-style: normal;
+}
+
+.rj-mistake-inner-card {
+  background: #1c1e24;
+  border-radius: 14px;
+  padding: 1.75rem 2rem;
+  margin: 1.25rem 0;
+}
+
+.rj-mistake-inner-card__title {
+  display: block;
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.rj-mistake-inner-card__body {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+
+.rj-mistake-inner-card__images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.rj-mistake-img-slot {
+  aspect-ratio: 16 / 9;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 1.5rem;
+  gap: 0.5rem;
+}
+
+.rj-mistake-img-slot span {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Dark section (black bg, Sections 6 & 8) ─────────── */
+.rj-dark-section {
+  background: #0d0d0d;
+  padding: 4rem 2rem;
+}
+
+.rj-dark-section__inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.rj-dark-section__emoji {
+  display: block;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.rj-dark-section__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1.25rem;
+}
+
+.rj-dark-section__body {
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.rj-dark-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-top: 1rem;
+}
+
+.rj-dark-list-item {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  gap: 0.875rem;
+  align-items: flex-start;
+}
+
+.rj-dark-list-item__icon {
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rj-dark-list-item__title {
+  display: block;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.rj-dark-list-item__text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Final website rows (Section 7) ──────────────────── */
+.rj-final-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.rj-final-row--reverse {
+  direction: rtl;
+}
+
+.rj-final-row--reverse > * {
+  direction: ltr;
+}
+
+.rj-final-row__gif {
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 260px;
+}
+
+/* Teal gradient border card */
+.rj-rajang-card {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, #0c9590, rgba(12, 149, 144, 0.15)) border-box;
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.rj-rajang-card__emoji {
+  font-size: 1.5rem;
+}
+
+.rj-rajang-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  display: block;
+}
+
+.rj-rajang-card__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rj-rajang-card__bullets li {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.rj-rajang-card__bullets li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #0c9590;
+  font-weight: 700;
+}
+
+/* GIF slot placeholder */
+.rj-gif-slot {
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  background: #f5f5f5;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+  font-size: 2rem;
+  gap: 0.75rem;
+}
+
+.rj-gif-slot span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #aaa;
+}
+
+/* ── Reflection closing lines (Section 8) ────────────── */
+.rj-reflection-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin: 2.5rem 0;
+}
+
+.rj-reflection-closing-italic {
+  text-align: center;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.rj-reflection-closing-bold {
+  text-align: center;
+  font-weight: 800;
+  color: #fff;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+/* ── Dark-theme overrides ────────────────────────────── */
+.dark-theme .rj-info-bar {
+  background: #1e1e2e;
+  border-color: #333;
+}
+
+.dark-theme .rj-info-col__value {
+  color: #eee;
+}
+
+.dark-theme .rj-info-divider {
+  background: #444;
+}
+
+.dark-theme .rj-large-title {
+  color: #eee;
+}
+
+.dark-theme .rj-rajang-card {
+  background:
+    linear-gradient(#1e1e2e, #1e1e2e) padding-box,
+    linear-gradient(135deg, #0c9590, rgba(12, 149, 144, 0.15)) border-box;
+}
+
+.dark-theme .rj-rajang-card__title {
+  color: #eee;
+}
+
+.dark-theme .rj-rajang-card__bullets li {
+  color: #aaa;
+}
+
+.dark-theme .rj-gif-slot {
+  background: #2a2a2a;
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .rj-info-bar {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .rj-info-divider {
+    width: 40px;
+    height: 1px;
+  }
+
+  .rj-sticky-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .rj-mistake-inner-card__images {
+    grid-template-columns: 1fr;
+  }
+
+  .rj-final-row,
+  .rj-final-row--reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+
+  .rj-dark-section__title,
+  .rj-large-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* ── Side Projects ────────────────────────────────────── */
+.side-projects {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.side-projects__title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 1.5rem;
+}
+
+.project__list--side {
+  gap: 0;
+}
+
+.project--side {
+  width: 33.333%;
+  margin-bottom: 2rem;
+}
+
+.project--side .project__description--title {
+  font-size: 26px;
+}
+
+/* ── Web Project Page ────────────────────────────────── */
+.web-project {
+  padding-top: 80px;
+}
+
+.web-project__hero {
+  padding: 4rem 0 3rem;
+  background: linear-gradient(135deg, #fceabb22, #84ddda22);
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+
+.web-project__body {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+.web-project__embed-section {
+  padding: 2rem 0 0;
+}
+
+.web-project__iframe-wrapper {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  max-height: 800px;
+  margin-top: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.web-project__iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.web-project__iframe-overlay {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+}
+
+.web-project__embed-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 4rem;
+  background: #f5f5f5;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  text-align: center;
+  color: #777;
+}
+
+.web-project__back {
+  padding: 3rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.dark-theme .side-projects {
+  border-top-color: rgba(255,255,255,0.1);
+}
+
+.dark-theme .side-projects__title {
+  color: #aaa;
+}
+
+.dark-theme .web-project__hero {
+  background: linear-gradient(135deg, #fceabb11, #84ddda11);
+  border-bottom-color: rgba(255,255,255,0.07);
+}
+
+.dark-theme .web-project__embed-fallback {
+  background: #333;
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .project--side {
+    width: 100%;
+  }
+
+  .web-project__iframe-wrapper {
+    height: 60vh;
+    border-radius: 0;
   }
 }
