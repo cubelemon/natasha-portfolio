@@ -1,46 +1,66 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ContactModal from '../components/ContactModal'
 
-const EXPERIENCE = [
-  { title: 'Rajang Digital Solution - IT & Services', subtitle: 'UX/UI Design Intern', date: '2024–2025' },
-  { title: 'Muafakat - IT & Services', subtitle: 'Web Designer & Developer', date: '2024' },
-  { title: 'USU - Retail', subtitle: 'Retail Team Member', date: '2024–2025' },
-]
-
-const EDUCATION = [
-  { title: 'University of Sydney', subtitle: 'Bachelor of Interaction Design', date: '2023–2026' },
-  { title: 'FrontEnd Simplified', subtitle: 'Front-End Engineering', date: '2024–2025' },
-  { title: 'Chung Hua Middle School No.1', subtitle: 'Science Stream UEC', date: '2017–2022' },
+const LANGUAGES = [
+  { src: '/assets/about/Language=English.svg', alt: 'English' },
+  { src: '/assets/about/Language=Chinese.svg', alt: 'Chinese' },
+  { src: '/assets/about/Language=Hokkien.svg', alt: 'Hokkien' },
+  { src: '/assets/about/Language=Malay.png', alt: 'Malay' },
 ]
 
 const TOOLS = [
-  { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/HTML5_Badge.svg/240px-HTML5_Badge.svg.png", name: "HTML" },
-  { src: "https://cdn.iconscout.com/icon/free/png-256/css-131-722685.png", name: "CSS" },
-  { src: "https://cdn.iconscout.com/icon/free/png-256/javascript-1-225993.png", name: "JavaScript" },
-  { src: "https://cdn.iconscout.com/icon/free/png-256/react-3-1175109.png", name: "React" },
-  { src: "https://www.figma.com/community/resource/b2593c93-dcd3-4eab-942a-b7703505d1eb/thumbnail", name: "Figma" },
-  { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/2101px-Adobe_Illustrator_CC_icon.svg.png", name: "Illustrator" },
-  { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/2101px-Adobe_Photoshop_CC_icon.svg.png", name: "Photoshop" },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg', name: 'HTML' },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg', name: 'CSS' },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', name: 'JavaScript' },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', name: 'React' },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg', name: 'Figma' },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg', name: 'Illustrator' },
+  { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg', name: 'Photoshop' },
 ]
 
-const LANGUAGES = [
-  { src: '/assets/language/Language=English.svg', alt: 'English' },
-  { src: '/assets/language/Language=Chinese.svg', alt: 'Chinese' },
-  { src: '/assets/language/Language=Hokkien.svg', alt: 'Hokkien' },
-  { src: '/assets/language/Language=Malay.png', alt: 'Malay' },
+const POLAROIDS = [
+  {
+    img: '/assets/about/suede-1.png',
+    caption: 'Running industry events with SUEDE 💟',
+    rotate: '2deg',
+  },
+  {
+    img: '/assets/about/suede-2.png',
+    caption: 'Connecting designers with the industry ⭐️',
+    rotate: '-1.5deg',
+  },
+  {
+    img: '/assets/about/life-outside.png',
+    caption: 'Life outside the screen 🌿',
+    rotate: '3deg',
+  },
+]
+
+const SIDE_QUESTS = [
+  {
+    img: '/assets/about/muaythai.png',
+    caption: "I train to reset. There's something about hitting things that clears the mind. 🥊",
+    rotate: '-2deg',
+  },
+  {
+    img: '/assets/about/bouldering.png',
+    caption: 'Problem solving, but make it vertical. 🧗',
+    rotate: '1deg',
+  },
+  {
+    img: '/assets/about/hiking.png',
+    caption: 'Best thinking happens on a trail. 🥾',
+    rotate: '-1deg',
+  },
 ]
 
 export default function About() {
   const [modalOpen, setModalOpen] = useState(false)
-  const [darkTheme, setDarkTheme] = useState(false)
-
-  useEffect(() => {
-    if (darkTheme) document.body.classList.add('dark-theme')
-    else document.body.classList.remove('dark-theme')
-    return () => document.body.classList.remove('dark-theme')
-  }, [darkTheme])
+  const [galleryOffset, setGalleryOffset] = useState(0)
+  const galleryRef = useRef(null)
+  const polaroidRowRef = useRef(null)
 
   useEffect(() => {
     if (modalOpen) document.body.classList.add('modal--open')
@@ -48,131 +68,299 @@ export default function About() {
     return () => document.body.classList.remove('modal--open')
   }, [modalOpen])
 
-  function updateGradient(e) {
-    const x = e.clientX / window.innerWidth
-    const y = e.clientY / window.innerHeight
-    const bg = document.getElementById('background')
-    if (bg) {
-      bg.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, #fceabb, transparent 50%),
-        radial-gradient(circle at ${(1 - x) * 100}% ${(1 - y) * 100}%, #84ddda, transparent 50%)`
+  // Polaroid scroll parallax
+  useEffect(() => {
+    function handleScroll() {
+      if (!galleryRef.current) return
+      const rect = galleryRef.current.getBoundingClientRect()
+      const distanceFromBottom = window.innerHeight - rect.top
+      if (distanceFromBottom > 0) {
+        setGalleryOffset(distanceFromBottom * 0.3)
+      }
     }
-  }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Scroll reveal observer
+  useEffect(() => {
+    const els = document.querySelectorAll('[data-scroll-reveal]')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('revealed')
+        })
+      },
+      { threshold: 0.15 }
+    )
+    els.forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <>
-      <canvas id="background"></canvas>
+      <style>{`
+        @keyframes fadeInLeft {
+          from { opacity: 0; transform: translateX(-30px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+          from { opacity: 0; transform: translateX(30px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
+        .ab-hero__left  { animation: fadeInLeft  800ms ease both; }
+        .ab-hero__right { animation: fadeInRight 800ms ease both; }
 
-      <section id="landing-page" className="about--landing" onMouseMove={updateGradient}>
-        <Navbar
-          onContactClick={() => setModalOpen(true)}
-          onContrastToggle={() => setDarkTheme(p => !p)}
-        />
+        [data-scroll-reveal] {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 600ms ease, transform 600ms ease;
+        }
+        [data-scroll-reveal].revealed {
+          opacity: 1;
+          transform: translateY(0);
+        }
 
-        <header className="header">
-          <div className="header__content--wrapper">
+        /* Side quest card stagger via nth-child */
+        [data-scroll-reveal].revealed .sq-card:nth-child(1) { transition-delay: 0ms; }
+        [data-scroll-reveal].revealed .sq-card:nth-child(2) { transition-delay: 150ms; }
+        [data-scroll-reveal].revealed .sq-card:nth-child(3) { transition-delay: 300ms; }
+        .sq-card {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 600ms ease, transform 600ms ease;
+        }
+        [data-scroll-reveal].revealed .sq-card {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* Override global reveal for rows that use child-level stagger */
+        .ab-stamps-row, .ab-tools-row {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+
+        /* Language stamps stagger */
+        .ab-stamps-row .ab-stamp-wrap {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 600ms ease, transform 600ms ease;
+        }
+        .ab-stamps-row.revealed .ab-stamp-wrap:nth-child(1) { transition-delay: 0ms; }
+        .ab-stamps-row.revealed .ab-stamp-wrap:nth-child(2) { transition-delay: 100ms; }
+        .ab-stamps-row.revealed .ab-stamp-wrap:nth-child(3) { transition-delay: 200ms; }
+        .ab-stamps-row.revealed .ab-stamp-wrap:nth-child(4) { transition-delay: 300ms; }
+        .ab-stamps-row.revealed .ab-stamp-wrap {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* Tools stagger */
+        .ab-tools-row .ab-tool {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 600ms ease, transform 600ms ease;
+        }
+        .ab-tools-row.revealed .ab-tool:nth-child(1) { transition-delay: 0ms; }
+        .ab-tools-row.revealed .ab-tool:nth-child(2) { transition-delay: 80ms; }
+        .ab-tools-row.revealed .ab-tool:nth-child(3) { transition-delay: 160ms; }
+        .ab-tools-row.revealed .ab-tool:nth-child(4) { transition-delay: 240ms; }
+        .ab-tools-row.revealed .ab-tool:nth-child(5) { transition-delay: 320ms; }
+        .ab-tools-row.revealed .ab-tool:nth-child(6) { transition-delay: 400ms; }
+        .ab-tools-row.revealed .ab-tool:nth-child(7) { transition-delay: 480ms; }
+        .ab-tools-row.revealed .ab-tool {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `}</style>
+
+      <div className="ab-page-wrapper">
+        <Navbar onContactClick={() => setModalOpen(true)} />
+
+        {/* ── SECTION 1: HERO ── */}
+        <section className="ab-hero">
+          <div className="ab-hero__left">
+            <p className="ab-label">About me</p>
+            <h1 className="ab-hero__name">Hey I'm Natasha,</h1>
+            <h1 className="ab-hero__sub">a UX Designer based in Sydney</h1>
+            <p className="ab-hero__para">
+              These are some words my friends describe me as :) Continue to read to learn more about me &lt;3
+            </p>
+            <div className="social__list">
+              <a href="https://www.linkedin.com/in/natasha-p-ng-9a0a41269/" target="_blank" rel="noreferrer" className="social__link bg--blue click">
+                <i className="fab fa-linkedin-in"></i>
+              </a>
+              <a href="https://github.com/cubelemon" target="_blank" rel="noreferrer" className="social__link bg--blue click">
+                <i className="fab fa-github"></i>
+              </a>
+              <a href="/assets/home/resume.pdf" target="_blank" rel="noreferrer" className="social__link bg--blue click">
+                <i className="fas fa-file-pdf"></i>
+              </a>
+            </div>
+          </div>
+          <div className="ab-hero__right">
             <figure className="me__img--wrapper">
-              <img src="/assets/about/me.PNG" alt="Natasha" />
+              <img src="/assets/about/me_cover-img.PNG" alt="Natasha" />
             </figure>
-            <div className="header__content">
-              <h1 className="about--title text--blue">Hey I'm Natasha,</h1>
-              <h1 className="about--title">
-                a UX Designer based in <span className="text--blue">Sydney</span>
-              </h1>
-              <p className="about--subtitle">
-                These are some words my friends describe me as :) Continue to read to learn more about me &lt;3
+          </div>
+        </section>
+
+        {/* ── SECTION 2: SIDE QUESTS ── */}
+        <section className="ab-section ab-side-quests" data-scroll-reveal>
+          <div className="ab-card-container">
+            <p className="ab-label">Side Quests</p>
+            <h2 className="ab-section__title">I'm a major side quester.</h2>
+            <p className="ab-section__para">
+              Design resets when I move. Whether I'm throwing punches, scaling walls, or finding a new trail, moving is what brings me back to my best creative self.
+            </p>
+            <div className="sq-row">
+              {SIDE_QUESTS.map((card, i) => (
+                <div
+                  key={i}
+                  className="sq-card"
+                  style={{ transform: `rotate(${card.rotate})` }}
+                >
+                  <div className="sq-card__img-wrap">
+                    <img src={card.img} alt={card.caption} className="sq-card__img" />
+                  </div>
+                  <p className="sq-card__caption">{card.caption}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION 3: POLAROID SCROLL GALLERY ── */}
+        <section style={{ width: '100%', overflow: 'hidden', height: '420px', position: 'relative', margin: '2rem 0' }}>
+          <div
+            ref={galleryRef}
+            style={{
+              display: 'flex',
+              gap: '2rem',
+              padding: '2rem 4rem',
+              width: 'max-content',
+              transform: `translateX(calc(60vw - ${galleryOffset}px))`,
+              transition: 'transform 0.1s linear',
+            }}
+          >
+            <div style={{ width: '260px', background: 'white', boxShadow: '0 8px 30px rgba(0,0,0,0.12)', padding: '1rem 1rem 2.5rem 1rem', borderRadius: '4px', transform: 'rotate(2deg)', flexShrink: 0 }}>
+              <div style={{ height: '200px', width: '100%', overflow: 'hidden' }}>
+                <img src="/assets/about/suede1.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="SUEDE event" />
+              </div>
+              <p style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: '0.85rem', color: '#555', textAlign: 'center', marginTop: '0.75rem' }}>Running industry events with SUEDE 🎪</p>
+            </div>
+
+            <div style={{ width: '260px', background: 'white', boxShadow: '0 8px 30px rgba(0,0,0,0.12)', padding: '1rem 1rem 2.5rem 1rem', borderRadius: '4px', transform: 'rotate(-1.5deg)', flexShrink: 0 }}>
+              <div style={{ height: '200px', width: '100%', overflow: 'hidden' }}>
+                <img src="/assets/about/suede2.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="SUEDE event" />
+              </div>
+              <p style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: '0.85rem', color: '#555', textAlign: 'center', marginTop: '0.75rem' }}>Connecting designers with the industry ✨</p>
+            </div>
+
+            <div style={{ width: '260px', background: 'white', boxShadow: '0 8px 30px rgba(0,0,0,0.12)', padding: '1rem 1rem 2.5rem 1rem', borderRadius: '4px', transform: 'rotate(3deg)', flexShrink: 0 }}>
+              <div style={{ height: '200px', width: '100%', overflow: 'hidden' }}>
+                <img src="/assets/about/life-outside.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Life outside the screen" />
+              </div>
+              <p style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: '0.85rem', color: '#555', textAlign: 'center', marginTop: '0.75rem' }}>Life outside the screen 🌿</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION 4: SUEDE ── */}
+        <section className="ab-section" data-scroll-reveal>
+          <div className="ab-suede-container">
+            <div className="ab-suede__left">
+              <p className="ab-label">Leadership</p>
+              <h2 className="ab-section__title ab-suede__title">Industries Events Director, SUEDE</h2>
+              <p className="ab-section__para">
+                SUEDE is the Sydney University Experience Design Society. As Industries Events Director, I manage relationships with industry partners, coordinate events from planning to delivery, and connect design students with real-world opportunities. It's where my design thinking meets stakeholder management.
               </p>
-              <div className="social__list">
-                <a href="https://www.linkedin.com/in/natasha-p-ng-9a0a41269/" target="_blank" rel="noreferrer" className="social__link bg--blue click">
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://github.com/cubelemon" target="_blank" rel="noreferrer" className="social__link bg--blue click">
-                  <i className="fab fa-github"></i>
-                </a>
-                <a href="/assets/Natasha_Resume_February_2025.pdf" target="_blank" rel="noreferrer" className="social__link bg--blue click">
-                  <i className="fas fa-file-pdf"></i>
-                </a>
-              </div>
+              <p className="ab-suede__date">Sydney University Experience Design Society · 2024–Present</p>
+              <a
+                href="https://www.linkedin.com/posts/natasha-png_inside-hatch-how-design-shapes-recruitment-ugcPost-7439941890772246528-kpMu?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEHT2EgBPWnadIC2WYZIFNaE0yG91BGWweU"
+                target="_blank"
+                rel="noreferrer"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginTop: '1.25rem', background: '#0A66C2', color: 'white', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none', padding: '0.6rem 1.25rem', borderRadius: '999px', transition: 'background 300ms ease' }}
+                onMouseEnter={e => e.currentTarget.style.background = '#084e96'}
+                onMouseLeave={e => e.currentTarget.style.background = '#0A66C2'}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                See our latest event recap
+              </a>
+            </div>
+            <div className="ab-suede__right">
+              {[
+                'Managing industry partner relationships',
+                'Writing and sending professional outreach',
+                'Coordinating events end-to-end',
+              ].map((item, i) => (
+                <div key={i} className="ab-suede__bullet">
+                  <span className="ab-suede__dot"></span>
+                  <span>{item}</span>
+                </div>
+              ))}
             </div>
           </div>
-        </header>
+        </section>
 
-        <button className="mail__btn click" onClick={() => setModalOpen(true)}>
-          <i className="fa-solid fa-envelope"></i>
-        </button>
-
-        <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-      </section>
-
-      {/* Experience & Education */}
-      <section id="about__experience">
-        <div className="container">
-          <div className="row">
-            <div className="direction__column">
-              <div className="row__half row__left">
-                <h2 className="casestudy__title">Experience</h2>
-                <ul className="exp__list">
-                  {EXPERIENCE.map((item) => (
-                    <li className="exp__list--item" key={item.title}>
-                      <div className="list__left">
-                        <h3 className="list__title">{item.title}</h3>
-                        <h3 className="list__subtitle">{item.subtitle}</h3>
-                      </div>
-                      <div className="list__right">
-                        <h3 className="list__date">{item.date}</h3>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="row__half work">
-                <h2 className="casestudy__title">Education</h2>
-                <ul className="exp__list">
-                  {EDUCATION.map((item) => (
-                    <li className="exp__list--item" key={item.title}>
-                      <div className="list__left">
-                        <h3 className="list__title">{item.title}</h3>
-                        <h3 className="list__subtitle">{item.subtitle}</h3>
-                      </div>
-                      <div className="list__right">
-                        <h3 className="list__date">{item.date}</h3>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Languages & Tools */}
-      <section id="about__me">
-        <div className="row">
-          <div className="container direction__row">
-            <h2 className="about--subtitle">These are the languages I speak:</h2>
-            <ul className="language__list">
-              {LANGUAGES.map((lang) => (
-                <figure className="language__wrapper" key={lang.alt}>
-                  <img src={lang.src} alt={lang.alt} className="bahasa" />
-                </figure>
+        {/* ── SECTION 5: LANGUAGES & TOOLS ── */}
+        <section className="ab-section">
+          <div className="ab-langs-container">
+            <h2 className="ab-langs__heading">These are the languages I speak:</h2>
+            <ul className="language__list ab-stamps-row" data-scroll-reveal>
+              {LANGUAGES.map((lang, i) => (
+                <div
+                  key={lang.alt}
+                  className="ab-stamp-wrap"
+                  style={{ transitionDelay: `${i * 100}ms`, display: 'inline-block', transition: 'transform 300ms ease' }}
+                >
+                  <figure
+                    className="language__wrapper ab-stamp"
+                    onMouseEnter={e => e.currentTarget.style.transform = 'rotate(5deg) scale(1.1)'}
+                    onMouseLeave={e => e.currentTarget.style.transform = ''}
+                    style={{ transition: 'transform 300ms ease', cursor: 'default' }}
+                  >
+                    <img src={lang.src} alt={lang.alt} className="bahasa" />
+                  </figure>
+                </div>
               ))}
             </ul>
 
-            <h2 className="about--subtitle">Oh and these too!</h2>
-            <div className="modal__languages language__row">
-              {TOOLS.map(({ src, name }) => (
-                <figure className="modal__language" key={name}>
-                  <img className="modal__language--img" src={src} alt={name} />
+            <h2 className="ab-langs__heading" style={{ marginTop: '2rem' }}>Oh and these too!</h2>
+            <div className="modal__languages language__row ab-tools-row" data-scroll-reveal>
+              {TOOLS.map(({ src, name }, i) => (
+                <figure
+                  className="modal__language ab-tool"
+                  key={name}
+                  style={{ transitionDelay: `${i * 80}ms`, transition: 'transform 300ms ease', cursor: 'default' }}
+                  onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-6px) scale(1.1)'}
+                  onMouseLeave={e => e.currentTarget.style.transform = ''}
+                >
+                  <img
+                    className="modal__language--img"
+                    src={src}
+                    alt={name}
+                    style={{ width: '48px', height: '48px', objectFit: 'contain' }}
+                  />
                   <span className="language__name">{name}</span>
                 </figure>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <Footer onContactClick={() => setModalOpen(true)} />
+        <Footer onContactClick={() => setModalOpen(true)} />
+      </div>
+
+      <button className="mail__btn click" onClick={() => setModalOpen(true)}>
+        <i className="fa-solid fa-envelope"></i>
+      </button>
+
+      <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   )
 }

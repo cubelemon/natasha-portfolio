@@ -1,82 +1,147 @@
+
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ContactModal from '../components/ContactModal'
 
-const MAIN_PROJECTS = [
-  {
-    id: 'herculabs',
-    title: 'Herculabs',
-    subtitle: 'UX Design, Product Design, Interaction Design',
-    para: 'An Olympics Simulation Booth | University of Sydney | 2024',
-    img: '/assets/Herculabs_cover.png',
-    internal: true,
-    href: '/projects/herculabs',
-  },
-  {
-    id: 'rajang',
-    title: 'Rajang',
-    subtitle: 'Web Design & Development - Figma, Wix',
-    para: 'A Website Redesign | Rajang Internship | 2024',
-    img: '/assets/Rajang_cover.png',
-    internal: true,
-    href: '/projects/rajang',
-  },
-  {
-    id: 'babycircle',
-    title: 'BabyCircle',
-    subtitle: 'UX/UI Design, Product Design',
-    para: 'A Parental Support App | University of Sydney | 2025',
-    img: '/assets/babycircle_cover.png',
-    internal: true,
-    href: '/projects/babycircle',
-  },
+const META_ROWS = [
+  { label: 'Kind',     value: 'UX Designer' },
+  { label: 'Size',     value: '3 internships, 1 degree' },
+  { label: 'Created',  value: 'Sarawak, Malaysia' },
+  { label: 'Modified', value: 'Sydney, Australia' },
 ]
 
-const SIDE_PROJECTS = [
-  {
-    id: 'muafakat',
-    title: 'Muafakat Website',
-    subtitle: 'Website Designer & Developer - Figma, HTML, CSS, JavaScript',
-    para: 'Malaysian Sport Competition Website | Muafakat | 2024',
-    img: '/assets/Muafakat.png',
-    internal: true,
-    href: '/projects/muafakat',
-  },
-  {
-    id: 'movieplug',
-    title: 'Movie Plug Website',
-    subtitle: 'Frontend Developer - Figma, HTML, CSS, JavaScript, API',
-    para: 'Movie Finder Website | FrontEnd Simplified | 2024',
-    img: '/assets/Movie_plug.png',
-    internal: true,
-    href: '/projects/movieplug',
-  },
-]
+const CHECKER_BG = {
+  backgroundImage: `
+    linear-gradient(45deg, #e0e0e0 25%, transparent 25%),
+    linear-gradient(-45deg, #e0e0e0 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e0e0e0 75%),
+    linear-gradient(-45deg, transparent 75%, #e0e0e0 75%)
+  `,
+  backgroundSize: '12px 12px',
+  backgroundPosition: '0 0, 0 6px, 6px -6px, -6px 0px',
+  backgroundColor: '#f5f5f5',
+}
 
-const DESIGNS = [
-  { img: '/assets/scoop-for-justice.png', caption: 'Social Media Campaign - Adobe XD, Adobe Photoshop', subtitle: 'University of Sydney | 2024' },
-  { img: '/assets/semporna.png', caption: 'Destination Website - Figma, HTML, CSS, JavaScript', subtitle: 'University of Sydney | 2023' },
-  { img: '/assets/Kavaguava.png', caption: 'Instagram Story Campaign - Figma, Adobe XD, Adobe Photoshop', subtitle: 'University of Sydney | 2023' },
-]
+function FileCard() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    function check() { setIsMobile(window.innerWidth <= 768) }
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  const hintStyle = { fontSize: '12px', color: '#aaa', textAlign: 'center', marginTop: '0.75rem', display: 'block', cursor: isOpen ? 'pointer' : 'default' }
+
+  if (isMobile) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div
+          onClick={() => setIsOpen(o => !o)}
+          style={{
+            width: '300px',
+            minHeight: '420px',
+            height: isOpen ? '580px' : 'auto',
+            background: 'white',
+            borderRadius: '1.25rem',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.15)',
+            padding: '1.25rem 1.25rem 1.5rem',
+            cursor: 'pointer',
+            transition: 'height 400ms ease',
+            overflow: 'hidden',
+            position: 'relative',
+          }}
+        >
+          <div style={{ display: 'flex', gap: '6px' }}>
+            {['#ff5f57', '#ffbd2e', '#28c840'].map(c => (
+              <div key={c} style={{ width: 12, height: 12, borderRadius: '50%', background: c }} />
+            ))}
+          </div>
+          <div style={{ height: isOpen ? '360px' : '200px', width: '100%', borderRadius: '0.75rem', overflow: 'hidden', marginTop: '2rem', transition: 'height 400ms ease', ...CHECKER_BG }}>
+            <img src="/assets/home/me_cutout.png" alt="Natasha" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+          </div>
+          <p style={{ fontSize: '1rem', fontWeight: 700, color: isOpen ? '#0c9590' : '#051616', marginTop: '1rem', transition: 'color 300ms ease' }}>
+            {isOpen ? 'Now open ✓' : 'Natasha.png'}
+          </p>
+          <div style={{ opacity: isOpen ? 0 : 1, height: isOpen ? 0 : 'auto', overflow: 'hidden', transition: 'opacity 300ms ease' }}>
+            {META_ROWS.map(({ label, value }) => (
+              <p key={label} style={{ fontSize: '12px', color: '#777', lineHeight: 1.8, margin: 0 }}>
+                <span style={{ fontFamily: 'monospace', color: '#aaa', display: 'inline-block', width: '70px' }}>{label}</span>
+                {value}
+              </p>
+            ))}
+            <span style={{ background: '#fff0f0', color: '#e74c3c', border: '1px solid #ffcccc', borderRadius: '999px', padding: '3px 10px', fontSize: '11px', fontWeight: 600, marginTop: '1rem', display: 'inline-block' }}>⚠ no jpeg please</span>
+          </div>
+        </div>
+        <span
+          style={hintStyle}
+          onClick={isOpen ? (e) => { e.stopPropagation(); setIsOpen(false) } : undefined}
+        >
+          {isOpen ? '✕ close' : 'tap to expand ↕'}
+        </span>
+      </div>
+    )
+  }
+
+  // Desktop — 3D flip
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ perspective: '1000px', width: '300px', height: '460px' }}>
+        <div
+          onClick={() => setIsOpen(o => !o)}
+          style={{
+            transformStyle: 'preserve-3d',
+            transition: 'transform 0.6s ease',
+            transform: isOpen ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            position: 'relative', width: '100%', height: '100%', cursor: 'pointer',
+          }}
+        >
+          {/* FRONT */}
+          <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', background: 'white', borderRadius: '1.25rem', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', padding: '1.25rem 1.25rem 2rem', overflow: 'hidden' }}>
+            <div style={{ display: 'flex', gap: '6px' }}>
+              {['#ff5f57', '#ffbd2e', '#28c840'].map(c => (
+                <div key={c} style={{ width: 12, height: 12, borderRadius: '50%', background: c }} />
+              ))}
+            </div>
+            <div style={{ height: '200px', width: '100%', borderRadius: '0.75rem', overflow: 'hidden', marginTop: '2rem', ...CHECKER_BG }}>
+              <img src="/assets/home/me_cutout.png" alt="Natasha" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+            </div>
+            <p style={{ fontSize: '1rem', fontWeight: 700, color: '#051616', marginTop: '1rem' }}>Natasha.png</p>
+            <div>
+              {META_ROWS.map(({ label, value }) => (
+                <p key={label} style={{ fontSize: '12px', color: '#777', lineHeight: 1.8, margin: 0 }}>
+                  <span style={{ fontFamily: 'monospace', color: '#aaa', display: 'inline-block', width: '70px' }}>{label}</span>
+                  {value}
+                </p>
+              ))}
+            </div>
+            <span style={{ background: '#fff0f0', color: '#e74c3c', border: '1px solid #ffcccc', borderRadius: '999px', padding: '3px 10px', fontSize: '11px', fontWeight: 600, marginTop: '1rem', marginBottom: '0.5rem', display: 'inline-block' }}>⚠ no jpeg please</span>
+          </div>
+          {/* BACK — transparent cutout only */}
+          <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: 'transparent', boxShadow: 'none', overflow: 'hidden' }}>
+            <img src="/assets/home/me_cutout.png" alt="Natasha" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', background: 'transparent' }} />
+          </div>
+        </div>
+      </div>
+      <span
+        style={hintStyle}
+        onClick={isOpen ? (e) => { e.stopPropagation(); setIsOpen(false) } : undefined}
+      >
+        {isOpen ? '✕ close' : 'click to open ↩'}
+      </span>
+    </div>
+  )
+}
+
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false)
-  const [darkTheme, setDarkTheme] = useState(false)
   const backgroundRef = useRef(null)
 
-  // Apply dark theme class to body
-  useEffect(() => {
-    if (darkTheme) {
-      document.body.classList.add('dark-theme')
-    } else {
-      document.body.classList.remove('dark-theme')
-    }
-    return () => document.body.classList.remove('dark-theme')
-  }, [darkTheme])
-
-  // Modal open/close body class
   useEffect(() => {
     if (modalOpen) {
       document.body.classList.add('modal--open')
@@ -101,33 +166,34 @@ export default function Home() {
       <canvas id="background"></canvas>
 
       <section id="landing-page" onMouseMove={updateGradient}>
-        <Navbar
-          onContactClick={() => setModalOpen(true)}
-          onContrastToggle={() => setDarkTheme(p => !p)}
-        />
+        <Navbar onContactClick={() => setModalOpen(true)} />
 
         <header className="header">
-          <div className="header__content">
-            <div className="header__container">
-              <h1 className="title">Hey, I'm Natasha Png</h1>
-              <div className="header__img--wrapper">
-                <img src="/assets/Lemon.png" className="header__img" alt="Lemon graphic" />
+          <div className="home-hero">
+            {/* LEFT */}
+            <div className="home-hero__left">
+              <p className="home-hero__label">UX Designer · Sydney, Australia</p>
+              <h1 className="home-hero__title">Hey, I'm Natasha Png</h1>
+              <p className="home-hero__para">
+                A User Experience Designer based in Sydney, Australia.
+                And yes that is my surname (no jpeg please!)
+              </p>
+              <div className="social__list">
+                <a href="https://www.linkedin.com/in/natasha-p-ng-9a0a41269/" target="_blank" rel="noreferrer" className="social__link click">
+                  <i className="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/cubelemon" target="_blank" rel="noreferrer" className="social__link click">
+                  <i className="fab fa-github"></i>
+                </a>
+                <a href="/assets/home/resume.pdf" target="_blank" rel="noreferrer" className="social__link click">
+                  <i className="fas fa-file-pdf"></i>
+                </a>
               </div>
             </div>
-            <h2 className="header__para">
-              A User Experience Designer based in Sydney, Australia.
-              And yes that is my surname (no jpeg please!)
-            </h2>
-            <div className="social__list">
-              <a href="https://www.linkedin.com/in/natasha-p-ng-9a0a41269/" target="_blank" rel="noreferrer" className="social__link click">
-                <i className="fab fa-linkedin-in"></i>
-              </a>
-              <a href="https://github.com/cubelemon" target="_blank" rel="noreferrer" className="social__link click">
-                <i className="fab fa-github"></i>
-              </a>
-              <a href="/assets/Natasha_Resume_February_2025.pdf" target="_blank" rel="noreferrer" className="social__link click">
-                <i className="fas fa-file-pdf"></i>
-              </a>
+
+            {/* RIGHT */}
+            <div className="home-hero__right" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <FileCard />
             </div>
           </div>
         </header>
@@ -145,11 +211,9 @@ export default function Home() {
 
       {/* Design philosophy */}
       <section id="design-philosophy">
-        <div className="container callout__container">
-          <h2 className="callout__title">
-            I treat every design as unfinished: <span className="italics">never perfect, always evolving.</span> The next step in innovation happens when we build with users, not just for them.
-          </h2>
-        </div>
+        <p className="callout__title">
+          I treat every design as unfinished: <span className="callout__accent">never perfect, always evolving.</span> The next step in innovation happens when we build with users, not just for them.
+        </p>
       </section>
 
       {/* Projects */}
@@ -159,18 +223,88 @@ export default function Home() {
             <h1 className="section__title">
               Here are some of my <span className="text--orange">Projects</span>
             </h1>
-            <ul className="project__list">
-              {MAIN_PROJECTS.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </ul>
-            <div className="side-projects">
-              <h2 className="side-projects__title">Side Projects</h2>
-              <ul className="project__list project__list--side">
-                {SIDE_PROJECTS.map((project) => (
-                  <ProjectCard key={project.id} project={project} side />
-                ))}
-              </ul>
+            <div className="projects__grid">
+              {/* Featured — BabyCircle */}
+              <Link
+                to="/projects/babycircle"
+                className="pg-card pg-card--featured project-card"
+                style={{ backgroundImage: "url('/assets/home/babycircle_cover.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#e8f4f3' }}
+              >
+                <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 30% 50%, rgba(12,149,144,0.3) 0%, transparent 60%), linear-gradient(to top, #e8f4f3 40%, rgba(232,244,243,0.7) 100%)', zIndex: 0 }} />
+                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '85%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', textAlign: 'center', opacity: 0, pointerEvents: 'none', zIndex: 2, transition: 'opacity 300ms ease' }} className="pg-card__hover-overlay">
+                  <p style={{ fontSize: '1rem', fontWeight: 700, lineHeight: 1.4, color: '#051616', margin: 0 }}>For when you need someone who thinks in systems</p>
+                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                    {['UX Research', 'Design Systems', 'Mobile App'].map(t => (
+                      <span key={t} style={{ borderRadius: '999px', padding: '4px 12px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.05em', background: 'rgba(5,22,22,0.1)', color: '#051616', border: '1px solid rgba(5,22,22,0.25)' }}>{t}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="pg-card__content" style={{ position: 'relative', zIndex: 1 }}>
+                  <div className="pg-pills card-pills">
+                    {['UX Design', 'Design Systems', 'Figma', 'User Research'].map(t => (
+                      <span key={t} style={{ background: 'rgba(5,22,22,0.08)', color: '#051616', border: '1px solid rgba(5,22,22,0.2)' }} className="pg-pill">{t}</span>
+                    ))}
+                  </div>
+                  <h2 className="pg-title pg-title--featured" style={{ color: '#051616' }}>BabyCircle</h2>
+                  <p className="pg-desc" style={{ color: 'rgba(5,22,22,0.7)' }}>A parental support app built around a trusted circle</p>
+                  <p className="pg-meta" style={{ color: 'rgba(5,22,22,0.5)' }}>Design Systems&nbsp;&nbsp;·&nbsp;&nbsp;University of Sydney · 2025</p>
+                </div>
+              </Link>
+
+              {/* Bottom row */}
+              <div className="projects__bottom-row">
+                <Link
+                  to="/projects/herculabs"
+                  className="pg-card pg-card--light project-card"
+                  style={{ backgroundImage: "url('/assets/home/Herculabs_cover.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+                >
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #f5f5f0 40%, rgba(245,245,240,0.6) 100%)', zIndex: 0 }} />
+                  <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '85%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', textAlign: 'center', opacity: 0, pointerEvents: 'none', zIndex: 2, transition: 'opacity 300ms ease' }} className="pg-card__hover-overlay">
+                    <p style={{ fontSize: '1rem', fontWeight: 700, lineHeight: 1.4, color: 'white', margin: 0 }}>For when you need a researcher who goes beyond the screen</p>
+                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                      {['UX Research', 'Interaction Design', 'Prototyping'].map(t => (
+                        <span key={t} style={{ borderRadius: '999px', padding: '4px 12px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.05em', background: 'rgba(255,255,255,0.15)', color: 'white', border: '1px solid rgba(255,255,255,0.3)' }}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="pg-card__content" style={{ position: 'relative', zIndex: 1 }}>
+                    <div className="pg-pills card-pills">
+                      {['UX Design', 'Interaction Design', 'Figma'].map(t => (
+                        <span key={t} className="pg-pill pg-pill--light">{t}</span>
+                      ))}
+                    </div>
+                    <h2 className="pg-title pg-title--half">Herculabs</h2>
+                    <p className="pg-desc pg-desc--light">A VR Olympic athlete simulation booth</p>
+                    <p className="pg-meta pg-meta--light">UX Designer&nbsp;&nbsp;·&nbsp;&nbsp;University of Sydney · 2024</p>
+                  </div>
+                </Link>
+
+                <Link
+                  to="/projects/rajang"
+                  className="pg-card pg-card--dark project-card"
+                  style={{ backgroundImage: "url('/assets/home/Rajang_cover.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+                >
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0a0a0a 40%, rgba(10,10,10,0.7) 100%)', zIndex: 0 }} />
+                  <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '85%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', textAlign: 'center', opacity: 0, pointerEvents: 'none', zIndex: 2, transition: 'opacity 300ms ease' }} className="pg-card__hover-overlay">
+                    <p style={{ fontSize: '1rem', fontWeight: 700, lineHeight: 1.4, color: 'white', margin: 0 }}>For when you need a designer who gets content strategy</p>
+                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                      {['Content Design', 'Web Design', 'SEO'].map(t => (
+                        <span key={t} style={{ borderRadius: '999px', padding: '4px 12px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.05em', background: 'rgba(255,255,255,0.15)', color: 'white', border: '1px solid rgba(255,255,255,0.3)' }}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="pg-card__content" style={{ position: 'relative', zIndex: 1 }}>
+                    <div className="pg-pills card-pills">
+                      {['Web Design', 'Content Design', 'SEO', 'Wix'].map(t => (
+                        <span key={t} className="pg-pill pg-pill--dark">{t}</span>
+                      ))}
+                    </div>
+                    <h2 className="pg-title pg-title--half">Rajang</h2>
+                    <p className="pg-desc pg-desc--dark">A website revamp with a content design twist</p>
+                    <p className="pg-meta pg-meta--dark">UX/UI Design Intern&nbsp;&nbsp;·&nbsp;&nbsp;Rajang Digital · 2024</p>
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -185,75 +319,7 @@ export default function Home() {
         <Link to="/about" className="about-teaser__link">Check out my About page →</Link>
       </section>
 
-      {/* Other designs */}
-      <section id="designs">
-        <div className="container">
-          <div className="row">
-            <h1 className="section__title">
-              Here are some of my <span className="text--orange">other designs</span>
-            </h1>
-            <ul className="design__list">
-              {DESIGNS.map((d, i) => (
-                <li className="design" key={i}>
-                  <div className="design__img--wrapper">
-                    <img src={d.img} className="design__img" alt={d.caption} />
-                  </div>
-                  <div className="design__description">
-                    <h3 className="design__caption">{d.caption}</h3>
-                    <h3 className="design__subtitle grey">{d.subtitle}</h3>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
       <Footer onContactClick={() => setModalOpen(true)} />
     </>
-  )
-}
-
-function ProjectCard({ project, side }) {
-  const { title, subtitle, para, img, internal, href, links } = project
-
-  const inner = (
-    <li className={`project${side ? ' project--side' : ''}`}>
-      <div className="project__wrapper">
-        <img src={img} className="project__img" alt={title} />
-        <div className="project__wrapper--bg"></div>
-        <div className="project__description">
-          <h3 className="project__description--title">{title}</h3>
-          <h4 className="project__description--sub-title">{subtitle}</h4>
-          <p className="project__description--para">{para}</p>
-          <div className="project__description--links">
-            {internal ? (
-              <span className="project__button">View Project</span>
-            ) : links ? (
-              links.map((l, i) => (
-                <a key={i} href={l.href} className="project__description--links" target="_blank" rel="noreferrer"
-                  onClick={e => e.stopPropagation()}>
-                  <i className={l.icon}></i>
-                </a>
-              ))
-            ) : null}
-          </div>
-        </div>
-      </div>
-    </li>
-  )
-
-  if (internal) {
-    return (
-      <Link to={href} className="project__link">
-        {inner}
-      </Link>
-    )
-  }
-
-  return (
-    <a href={href} target="_blank" rel="noreferrer" className="project__link">
-      {inner}
-    </a>
   )
 }

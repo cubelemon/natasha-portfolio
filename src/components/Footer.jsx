@@ -4,7 +4,7 @@ export default function Footer({ onContactClick }) {
       <div className="container">
         <div className="row footer__row">
           <figure>
-            <img className="footer__logo--img" src="/assets/personal--logo.svg" alt="Natasha logo" />
+            <img className="footer__logo--img" src="/assets/home/personal--logo.png" alt="Natasha logo" />
           </figure>
           <div className="footer__social--list">
             <a href="https://github.com/cubelemon" target="_blank" rel="noreferrer"

@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 
-export default function Navbar({ onContactClick, onContrastToggle }) {
+export default function Navbar({ onContactClick }) {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -23,7 +23,7 @@ export default function Navbar({ onContactClick, onContrastToggle }) {
         <li>
           <figure>
             <Link to="/">
-              <img id="personal-logo" src="/assets/personal--logo.png" alt="Natasha logo" />
+              <img id="personal-logo" src="/assets/home/personal--logo.png" alt="Natasha logo" />
             </Link>
           </figure>
         </li>
@@ -40,11 +40,6 @@ export default function Navbar({ onContactClick, onContrastToggle }) {
         <li className="nav__link">
           <a href="#" className="nav__link--anchor link__hover-effect link__hover-effect--black" onClick={(e) => { e.preventDefault(); onContactClick() }}>
             Contact
-          </a>
-        </li>
-        <li className="nav__link click" onClick={onContrastToggle}>
-          <a href="#" className="nav__link--anchor link__hover-effect link__hover-effect--black">
-            <i className="fas fa-adjust"></i>
           </a>
         </li>
       </ul>

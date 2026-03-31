@@ -1,21 +1,13 @@
 import CaseStudyLayout from '../../components/CaseStudyLayout'
 
-function GifSlot({ label }) {
-  return (
-    <div className="rj-gif-slot">
-      <i className="fas fa-film" />
-      <span>{label}</span>
-    </div>
-  )
-}
-
 export default function Rajang() {
   return (
     <CaseStudyLayout
+      slug="rajang"
       heroTag="Web Design & Development, Internship"
       heroTitle="A Website Revamp with a Twist"
       heroSubtitle="Where I Realised the Importance of Content Design for Businesses"
-      coverImg="/assets/rajang/rajang-cover.png"
+      coverImg="/assets/home/Rajang_cover.png"
       coverAlt="Rajang cover"
     >
 
@@ -33,8 +25,13 @@ export default function Rajang() {
         <div className="rj-info-divider" />
         <div className="rj-info-col">
           <span className="rj-info-col__label">Duration</span>
-          <span className="rj-info-col__value">December 2024 - January 2025</span>
+          <span className="rj-info-col__value">December 2024, January 2025</span>
         </div>
+      </div>
+
+      {/* Showcase GIF */}
+      <div className="rj-showcase-gif">
+        <img src="/assets/rajang/showcase.gif" alt="Project showcase" className="rj-gif rj-showcase-gif__img" />
       </div>
 
       {/* ── 2. Moodboard ─────────────────────────────────── */}
@@ -52,6 +49,11 @@ export default function Rajang() {
           <p className="rj-moodboard-card__body">
             The first thing I did was create a moodboard to set the aesthetic tone. I looked into companies in similar industries for inspiration and used their existing brand colours, orange, red, and yellow, as the foundation for a new look that felt bold and tech-driven.
           </p>
+          <img
+            src="/assets/rajang/ori.gif"
+            alt="Original site walkthrough"
+            className="rj-gif rj-moodboard-card__gif"
+          />
         </div>
       </section>
 
@@ -202,68 +204,70 @@ export default function Rajang() {
         </div>
       </div>
 
-      {/* ── 7. Final website ─────────────────────────────── */}
-      <section className="cs-section--wide">
-        <h2 className="cs-section__title" style={{ textAlign: 'center' }}>
-          What the Final Website Looks Like
-        </h2>
-        <p className="cs-section__body" style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto 3rem' }}>
-          Here's how the final deliverables came together:
-        </p>
+      {/* ── 7. Final website (white bg) ──────────────────── */}
+      <div className="rj-final-section">
+        <div className="rj-final-section__inner">
+          <h2 className="cs-section__title" style={{ textAlign: 'center' }}>
+            What the Final Website Looks Like
+          </h2>
+          <p className="cs-section__body" style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto 3rem' }}>
+            Here's how the final deliverables came together:
+          </p>
 
-        {/* Row 1: card left, GIF right */}
-        <div className="rj-final-row" style={{ marginBottom: '2rem' }}>
-          <div className="rj-rajang-card">
-            <span className="rj-rajang-card__emoji">🏠</span>
-            <strong className="rj-rajang-card__title">The Home Page: A Confident First Impression</strong>
-            <ul className="rj-rajang-card__bullets">
-              <li>Clear messaging that communicates who Rajang is</li>
-              <li>Strong CTAs that guide users through the site</li>
-              <li>Simple, intuitive navigation to reduce friction</li>
-            </ul>
+          {/* Row 1: card left, GIF right */}
+          <div className="rj-final-row">
+            <div className="rj-rajang-card">
+              <span className="rj-rajang-card__emoji">🏠</span>
+              <strong className="rj-rajang-card__title">The Home Page: A Confident First Impression</strong>
+              <ul className="rj-rajang-card__bullets">
+                <li>Clear messaging that communicates who Rajang is</li>
+                <li>Strong CTAs that guide users through the site</li>
+                <li>Simple, intuitive navigation to reduce friction</li>
+              </ul>
+            </div>
+            <div className="rj-final-row__gif">
+              <img src="/assets/rajang/home.gif" alt="Home page" className="rj-gif" />
+            </div>
           </div>
-          <div className="rj-final-row__gif">
-            <GifSlot label="Home page GIF" />
+
+          {/* Row 2: GIF left, card right */}
+          <div className="rj-final-row rj-final-row--reverse">
+            <div className="rj-rajang-card">
+              <span className="rj-rajang-card__emoji">🔗</span>
+              <strong className="rj-rajang-card__title">The About Page: Keeping It Simple, Yet Credible</strong>
+              <ul className="rj-rajang-card__bullets">
+                <li>Straight-to-the-point content: mission, values, location, capabilities</li>
+                <li>Builds trust without overwhelming users with unnecessary info</li>
+              </ul>
+            </div>
+            <div className="rj-final-row__gif">
+              <img src="/assets/rajang/about.gif" alt="About page" className="rj-gif" />
+            </div>
+          </div>
+
+          {/* Row 3: card left, GIF right */}
+          <div className="rj-final-row" style={{ marginBottom: 0 }}>
+            <div className="rj-rajang-card">
+              <span className="rj-rajang-card__emoji">💌</span>
+              <strong className="rj-rajang-card__title">The Careers Page: Built to Attract Talent</strong>
+              <ul className="rj-rajang-card__bullets">
+                <li>Roles separated by level, each with concise job descriptions</li>
+                <li>'Life at Rajang' section gives a peek into the company culture and perks</li>
+                <li>Balanced tone, friendly and professional, without overhyping</li>
+              </ul>
+            </div>
+            <div className="rj-final-row__gif">
+              <img src="/assets/rajang/careers.gif" alt="Careers page" className="rj-gif" />
+            </div>
           </div>
         </div>
-
-        {/* Row 2: GIF left, card right */}
-        <div className="rj-final-row rj-final-row--reverse" style={{ marginBottom: '2rem' }}>
-          <div className="rj-rajang-card">
-            <span className="rj-rajang-card__emoji">🔗</span>
-            <strong className="rj-rajang-card__title">The About Page: Keeping It Simple, Yet Credible</strong>
-            <ul className="rj-rajang-card__bullets">
-              <li>Straight-to-the-point content: mission, values, location, capabilities</li>
-              <li>Builds trust without overwhelming users with unnecessary info</li>
-            </ul>
-          </div>
-          <div className="rj-final-row__gif">
-            <GifSlot label="About page GIF" />
-          </div>
-        </div>
-
-        {/* Row 3: card left, GIF right */}
-        <div className="rj-final-row">
-          <div className="rj-rajang-card">
-            <span className="rj-rajang-card__emoji">💌</span>
-            <strong className="rj-rajang-card__title">The Careers Page: Built to Attract Talent</strong>
-            <ul className="rj-rajang-card__bullets">
-              <li>Roles separated by level, each with concise job descriptions</li>
-              <li>'Life at Rajang' section gives a peek into the company culture and perks</li>
-              <li>Balanced tone, friendly and professional, without overhyping</li>
-            </ul>
-          </div>
-          <div className="rj-final-row__gif">
-            <GifSlot label="Careers page GIF" />
-          </div>
-        </div>
-      </section>
+      </div>
 
       {/* ── 8. Reflection (black bg) ─────────────────────── */}
       <div className="rj-dark-section">
         <div className="rj-dark-section__inner">
           <span className="rj-dark-section__emoji">🔭</span>
-          <h2 className="rj-dark-section__title">Looking back - What I learned</h2>
+          <h2 className="rj-dark-section__title">Looking back, What I learned</h2>
           <ul className="rj-dark-list">
             {[
               {

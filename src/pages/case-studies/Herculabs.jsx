@@ -12,20 +12,19 @@ const CONTRIBUTIONS = [
     num: '01',
     title: 'Defining the Problem',
     body: "Understanding that behaviour doesn't always match reported data, I led contextual observations to capture genuine fan experiences during Olympic screenings.",
-    color: '#3841D8',
+    color: '#3444D5',
   },
   {
     num: '02',
     title: 'Visualising the Problem & Solution',
     body: 'To support clear and compelling pitches, I visualised the problem through storyboards and used annotated sketches to bring our concept to life.',
-    color: '#F59BBB',
+    color: '#3444D5',
   },
   {
     num: '03',
     title: 'UI Redesign & Visual Lead',
     body: "I took charge of a visual redesign to make sure every element stayed true to Herculabs' branding.",
-    color: '#FCEABB',
-    accentDark: true,
+    color: '#3444D5',
   },
 ]
 
@@ -196,6 +195,8 @@ const TAKEAWAYS = [
 export default function Herculabs() {
   return (
     <CaseStudyLayout
+      slug="herculabs"
+      pageClass="hl-page"
       heroTag="UX Design, Product Design, University of Sydney"
       heroTitle="HercuLabs"
       heroSubtitle="A VR Olympic Athlete Experience Simulator Booth, bridging the gap between fans and the athletes they love."
@@ -206,7 +207,7 @@ export default function Herculabs() {
 
       {/* Overview */}
       <section className="cs-section">
-        <p className="cs-section__label">Overview</p>
+        <p className="cs-section__label" style={{ color: '#3444D5' }}>Overview</p>
         <h2 className="cs-section__title">Bringing Fans Closer to Olympians</h2>
         <p className="cs-section__body">
           HercuLabs transforms the way fans experience the Olympics, letting them step into the shoes of their favourite athletes.
@@ -218,14 +219,14 @@ export default function Herculabs() {
       <hr className="cs-divider" />
 
       {/* My Role */}
-      <section className="cs-section--wide">
-        <p className="cs-section__label">My Role</p>
+      <section className="cs-section--wide hl-section--alt">
+        <p className="cs-section__label" style={{ color: '#3444D5' }}>My Role</p>
         <h2 className="cs-section__title" style={{ maxWidth: 800, marginLeft: 'auto', marginRight: 'auto' }}>
           My Key Contributions
         </h2>
         <div className="cs-feature-grid">
           {CONTRIBUTIONS.map((c) => (
-            <div className="cs-feature-card" key={c.num} style={{ borderTop: `4px solid ${c.color}` }}>
+            <div className="cs-feature-card hl-feature-card" key={c.num} style={{ borderTop: `4px solid ${c.color}` }}>
               <span className="cs-feature-card__num" style={{ color: c.color }}>{c.num}</span>
               <h3 className="cs-feature-card__title">{c.title}</h3>
               <p className="cs-feature-card__body">{c.body}</p>
@@ -241,7 +242,7 @@ export default function Herculabs() {
 
       {/* The Problem */}
       <section className="cs-section">
-        <p className="cs-section__label">The Problem</p>
+        <p className="cs-section__label" style={{ color: '#3444D5' }}>The Problem</p>
         <h2 className="cs-section__title">Why Do Fans Lose Interest After the Olympics?</h2>
         <div className="cs-problem">
           <p className="cs-problem__title">Problem Statement</p>
@@ -262,8 +263,8 @@ export default function Herculabs() {
       <hr className="cs-divider" />
 
       {/* Research */}
-      <section className="cs-section">
-        <p className="cs-section__label">Research</p>
+      <section className="cs-section hl-section--alt">
+        <p className="cs-section__label" style={{ color: '#3444D5' }}>Research</p>
         <h2 className="cs-section__title">Research & Insights</h2>
         <p className="cs-section__body">
           To get real insights, we used two research methods: <strong>Interviews & Questionnaires</strong> (what
@@ -271,7 +272,7 @@ export default function Herculabs() {
         </p>
         <div className="cs-stat-row">
           <div className="cs-stat">
-            <span className="cs-stat__num" style={{ color: '#3841D8' }}>73%</span>
+            <span className="cs-stat__num" style={{ color: '#3444D5' }}>73%</span>
             <span className="cs-stat__label">of fans engage with athletes online</span>
           </div>
           <div className="cs-stat cs-stat--muted">
@@ -290,7 +291,7 @@ export default function Herculabs() {
 
       {/* Ideation */}
       <section className="cs-section">
-        <p className="cs-section__label">Ideation</p>
+        <p className="cs-section__label" style={{ color: '#3444D5' }}>Ideation</p>
         <h2 className="cs-section__title">From Insights to Ideas</h2>
         <p className="cs-section__body">
           We brainstormed 24 solutions and narrowed it down to 3 strong concepts. A decision matrix and informal user
@@ -317,8 +318,8 @@ export default function Herculabs() {
       <hr className="cs-divider" />
 
       {/* Design Process Timeline */}
-      <section className="cs-section--wide">
-        <p className="cs-section__label">Design Process</p>
+      <section className="cs-section--wide hl-section--alt">
+        <p className="cs-section__label" style={{ color: '#3444D5' }}>Design Process</p>
         <h2 className="cs-section__title">Iteration Timeline</h2>
 
         <div className="cs-timeline-scroll">
@@ -343,16 +344,16 @@ export default function Herculabs() {
             <img src="/assets/herculabs/Detailed%20sketches.png" alt="Detailed concept sketches" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 10 }} />
           </div>
           <div>
-            <p className="cs-img-label" style={{ color: '#3841D8' }}>2nd Prototype, Week 11</p>
+            <p className="cs-img-label" style={{ color: '#3444D5' }}>2nd Prototype, Week 11</p>
             <img src="/assets/herculabs/2nd%20Prototype.png" alt="Redesigned UI, Herculabs branding" style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 10 }} />
           </div>
         </div>
 
         <div style={{ marginTop: '2.5rem' }}>
-          <h3 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '1.5rem' }}>Notable Changes</h3>
+          <h3 style={{ fontSize: '1.3rem', fontWeight: 900, marginBottom: '1.5rem', color: '#051616' }}>Notable Changes</h3>
           <div className="cs-notable-changes">
             {NOTABLE_CHANGES.map((c) => (
-              <div key={c.num} className="cs-notable-change">
+              <div key={c.num} className="cs-notable-change hl-notable-change">
                 <div className="cs-notable-change__header">
                   <span className="cs-notable-change__num">{c.num}</span>
                   <div>
@@ -373,7 +374,7 @@ export default function Herculabs() {
                         <img src={c.before} alt={`${c.title}, before`} className="cs-notable-change__plain-img" />
                       </div>
                     </div>
-                    <span className="cs-notable-change__arrow">→</span>
+                    <span className="cs-notable-change__arrow hl-arrow">→</span>
                     <div className="cs-notable-change__img-wrap">
                       <span className="cs-notable-change__img-tag cs-notable-change__img-tag--after">After</span>
                       <div className="cs-notable-change__white-wrap">
@@ -392,7 +393,7 @@ export default function Herculabs() {
 
       {/* Final Product — Booth Flow */}
       <section className="cs-section--wide">
-        <p className="cs-section__label">Final Design</p>
+        <p className="cs-section__label" style={{ color: '#3444D5' }}>Final Design</p>
         <h2 className="cs-section__title">The Booth Experience</h2>
         <p className="cs-section__body" style={{ maxWidth: 800, margin: '0 auto 2.5rem' }}>
           The experience flows through five physical stations, each designed for a specific moment of interaction.
@@ -400,9 +401,9 @@ export default function Herculabs() {
         <div className="cs-booth-flow">
           {BOOTH_STEPS.map((s, i) => (
             <>
-              {i > 0 && <span key={`arrow-${i}`} className="cs-booth-step__arrow">→</span>}
+              {i > 0 && <span key={`arrow-${i}`} className="cs-booth-step__arrow hl-arrow">→</span>}
               <div key={i} className="cs-booth-step">
-                <div className="cs-booth-step__icon">
+                <div className="cs-booth-step__icon hl-booth-icon">
                   <i className={s.icon}></i>
                 </div>
                 <span className="cs-booth-step__label">{s.label}</span>
@@ -416,10 +417,10 @@ export default function Herculabs() {
       <hr className="cs-divider" />
 
       {/* Walk Through */}
-      {WALKTHROUGH.map((w) => (
+      {WALKTHROUGH.map((w, wi) => (
         <div key={w.step}>
-          <section className="cs-section--wide">
-            <p className="cs-section__label" style={{ color: '#3841D8' }}>Step {w.step}</p>
+          <section className={`cs-section--wide${wi % 2 === 0 ? ' hl-section--alt' : ''}`}>
+            <p className="cs-section__label" style={{ color: '#3444D5' }}>Step {w.step}</p>
             <h2 className="cs-section__title" style={{ maxWidth: 800, marginLeft: 'auto', marginRight: 'auto' }}>
               {w.title}
             </h2>
@@ -428,8 +429,11 @@ export default function Herculabs() {
                 <p key={i} className="cs-section__body">{para}</p>
               ))}
             </div>
-            <div style={{ maxWidth: 800, margin: '1.5rem auto 0', background: '#fff', borderRadius: 10, padding: '0.75rem' }}>
-              <img src={w.gifSrc} alt={w.imgLabel} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 6 }} />
+            <div style={{ maxWidth: 800, margin: '1.5rem auto 0' }}>
+              <p className="hl-gif-label">Step {w.step}</p>
+              <div className="hl-gif-wrap">
+                <img src={w.gifSrc} alt={w.imgLabel} style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 6 }} />
+              </div>
             </div>
           </section>
           <hr className="cs-divider" />
@@ -437,12 +441,12 @@ export default function Herculabs() {
       ))}
 
       {/* Key Takeaways */}
-      <section className="cs-section--wide">
-        <p className="cs-section__label">Reflection</p>
+      <section className="cs-section--wide hl-section--alt">
+        <p className="cs-section__label" style={{ color: '#3444D5' }}>Reflection</p>
         <h2 className="cs-section__title">Key Takeaways</h2>
         <div className="cs-feature-grid">
           {TAKEAWAYS.map((t, i) => (
-            <div key={i} className="cs-feature-card" style={{ borderTop: '4px solid #3841D8' }}>
+            <div key={i} className="cs-feature-card hl-feature-card" style={{ borderTop: '4px solid #3444D5' }}>
               <h3 className="cs-feature-card__title">{t.title}</h3>
               <p className="cs-feature-card__body">{t.body}</p>
             </div>
