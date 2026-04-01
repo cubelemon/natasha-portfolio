@@ -169,9 +169,9 @@ export default function Home() {
         <Navbar onContactClick={() => setModalOpen(true)} />
 
         <header className="header">
-          <div className="home-hero">
+          <div className="home-hero hero-wrapper">
             {/* LEFT */}
-            <div className="home-hero__left">
+            <div className="home-hero__left hero-left">
               <p className="home-hero__label">UX Designer · Sydney, Australia</p>
               <h1 className="home-hero__title">Hey, I'm Natasha Png</h1>
               <p className="home-hero__para">
@@ -189,10 +189,13 @@ export default function Home() {
                   <i className="fas fa-file-pdf"></i>
                 </a>
               </div>
+              <a href="#projects" className="scroll">
+                <div className="scroll__icon click"></div>
+              </a>
             </div>
 
             {/* RIGHT */}
-            <div className="home-hero__right" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="home-hero__right hero-right" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
               <FileCard />
             </div>
           </div>
@@ -201,10 +204,6 @@ export default function Home() {
         <button className="mail__btn click" onClick={() => setModalOpen(true)}>
           <i className="fa-solid fa-envelope"></i>
         </button>
-
-        <a href="#projects" className="scroll">
-          <div className="scroll__icon click"></div>
-        </a>
 
         <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       </section>

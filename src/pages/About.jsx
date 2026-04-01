@@ -61,6 +61,7 @@ export default function About() {
   const [galleryOffset, setGalleryOffset] = useState(0)
   const galleryRef = useRef(null)
   const polaroidRowRef = useRef(null)
+  const stickyRef = useRef(null)
 
   useEffect(() => {
     if (modalOpen) document.body.classList.add('modal--open')
@@ -81,6 +82,25 @@ export default function About() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Mobile sticky horizontal scroll
+  useEffect(() => {
+    const wrapper = stickyRef.current
+    if (!wrapper) return
+    function handleStickyScroll() {
+      if (window.innerWidth > 768) return
+      const wrapperTop = wrapper.offsetTop
+      const scrolled = window.scrollY - wrapperTop
+      const maxScroll = wrapper.offsetHeight - window.innerHeight
+      const progress = Math.max(0, Math.min(1, scrolled / maxScroll))
+      const track = wrapper.querySelector('.polaroid-track')
+      if (!track) return
+      const maxTranslate = track.scrollWidth - window.innerWidth
+      track.style.transform = `translateX(-${progress * maxTranslate}px)`
+    }
+    window.addEventListener('scroll', handleStickyScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleStickyScroll)
   }, [])
 
   // Scroll reveal observer
@@ -233,40 +253,58 @@ export default function About() {
         </section>
 
         {/* ── SECTION 3: POLAROID SCROLL GALLERY ── */}
-        <section style={{ width: '100%', overflow: 'hidden', height: '420px', position: 'relative', margin: '2rem 0' }}>
-          <div
-            ref={galleryRef}
-            style={{
-              display: 'flex',
-              gap: '2rem',
-              padding: '2rem 4rem',
-              width: 'max-content',
-              transform: `translateX(calc(60vw - ${galleryOffset}px))`,
-              transition: 'transform 0.1s linear',
-            }}
-          >
-            <div style={{ width: '260px', background: 'white', boxShadow: '0 8px 30px rgba(0,0,0,0.12)', padding: '1rem 1rem 2.5rem 1rem', borderRadius: '4px', transform: 'rotate(2deg)', flexShrink: 0 }}>
-              <div style={{ height: '200px', width: '100%', overflow: 'hidden' }}>
-                <img src="/assets/about/suede1.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="SUEDE event" />
+        <div className="polaroid-scroll-wrapper" ref={stickyRef}>
+          {/* Mobile sticky layer */}
+          <div className="polaroid-sticky">
+            <div className="polaroid-track">
+              <div className="polaroid-card-mobile">
+                <img src="/assets/about/suede1.png" alt="SUEDE event" />
+                <p>Running industry events with SUEDE 🎪</p>
               </div>
-              <p style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: '0.85rem', color: '#555', textAlign: 'center', marginTop: '0.75rem' }}>Running industry events with SUEDE 🎪</p>
-            </div>
-
-            <div style={{ width: '260px', background: 'white', boxShadow: '0 8px 30px rgba(0,0,0,0.12)', padding: '1rem 1rem 2.5rem 1rem', borderRadius: '4px', transform: 'rotate(-1.5deg)', flexShrink: 0 }}>
-              <div style={{ height: '200px', width: '100%', overflow: 'hidden' }}>
-                <img src="/assets/about/suede2.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="SUEDE event" />
+              <div className="polaroid-card-mobile">
+                <img src="/assets/about/suede2.png" alt="SUEDE event" />
+                <p>Connecting designers with the industry ✨</p>
               </div>
-              <p style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: '0.85rem', color: '#555', textAlign: 'center', marginTop: '0.75rem' }}>Connecting designers with the industry ✨</p>
-            </div>
-
-            <div style={{ width: '260px', background: 'white', boxShadow: '0 8px 30px rgba(0,0,0,0.12)', padding: '1rem 1rem 2.5rem 1rem', borderRadius: '4px', transform: 'rotate(3deg)', flexShrink: 0 }}>
-              <div style={{ height: '200px', width: '100%', overflow: 'hidden' }}>
-                <img src="/assets/about/life-outside.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Life outside the screen" />
+              <div className="polaroid-card-mobile">
+                <img src="/assets/about/life-outside.png" alt="Life outside the screen" />
+                <p>Life outside the screen 🌿</p>
               </div>
-              <p style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: '0.85rem', color: '#555', textAlign: 'center', marginTop: '0.75rem' }}>Life outside the screen 🌿</p>
             </div>
           </div>
-        </section>
+          {/* Desktop translateX animation (hidden on mobile via CSS) */}
+          <section className="polaroid-desktop" style={{ width: '100%', overflow: 'hidden', height: '420px', position: 'relative', margin: '2rem 0' }}>
+            <div
+              ref={galleryRef}
+              style={{
+                display: 'flex',
+                gap: '2rem',
+                padding: '2rem 4rem',
+                width: 'max-content',
+                transform: `translateX(calc(60vw - ${galleryOffset}px))`,
+                transition: 'transform 0.1s linear',
+              }}
+            >
+              <div style={{ width: '260px', background: 'white', boxShadow: '0 8px 30px rgba(0,0,0,0.12)', padding: '1rem 1rem 2.5rem 1rem', borderRadius: '4px', transform: 'rotate(2deg)', flexShrink: 0 }}>
+                <div style={{ height: '200px', width: '100%', overflow: 'hidden' }}>
+                  <img src="/assets/about/suede1.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="SUEDE event" />
+                </div>
+                <p style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: '0.85rem', color: '#555', textAlign: 'center', marginTop: '0.75rem' }}>Running industry events with SUEDE 🎪</p>
+              </div>
+              <div style={{ width: '260px', background: 'white', boxShadow: '0 8px 30px rgba(0,0,0,0.12)', padding: '1rem 1rem 2.5rem 1rem', borderRadius: '4px', transform: 'rotate(-1.5deg)', flexShrink: 0 }}>
+                <div style={{ height: '200px', width: '100%', overflow: 'hidden' }}>
+                  <img src="/assets/about/suede2.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="SUEDE event" />
+                </div>
+                <p style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: '0.85rem', color: '#555', textAlign: 'center', marginTop: '0.75rem' }}>Connecting designers with the industry ✨</p>
+              </div>
+              <div style={{ width: '260px', background: 'white', boxShadow: '0 8px 30px rgba(0,0,0,0.12)', padding: '1rem 1rem 2.5rem 1rem', borderRadius: '4px', transform: 'rotate(3deg)', flexShrink: 0 }}>
+                <div style={{ height: '200px', width: '100%', overflow: 'hidden' }}>
+                  <img src="/assets/about/life-outside.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Life outside the screen" />
+                </div>
+                <p style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: '0.85rem', color: '#555', textAlign: 'center', marginTop: '0.75rem' }}>Life outside the screen 🌿</p>
+              </div>
+            </div>
+          </section>
+        </div>
 
         {/* ── SECTION 4: SUEDE ── */}
         <section className="ab-section" data-scroll-reveal>

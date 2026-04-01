@@ -616,6 +616,48 @@ nav,
   .home-hero__right {
     width: 100%;
   }
+  .hero-wrapper {
+    flex-direction: column !important;
+    padding: 120px 1.5rem 3rem !important;
+    min-height: auto !important;
+  }
+  .hero-left {
+    width: 100% !important;
+    text-align: center !important;
+  }
+  .hero-left .social__list {
+    justify-content: center !important;
+  }
+  .hero-right {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-bottom: 2rem !important;
+  }
+  .header {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    padding-top: 0 !important;
+  }
+  #landing-page {
+    padding-top: 80px !important;
+    min-height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .scroll {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+  }
 }
 /* ─────────────────────────────────────────────────────────────── */
 
@@ -4644,6 +4686,58 @@ Small phone
 @media (max-width: 768px) {
   .feature-row {
     flex-direction: column !important;
+  }
+  .polaroid-scroll-wrapper {
+    height: 300vh;
+    position: relative;
+  }
+  .polaroid-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .polaroid-track {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0 2rem;
+    width: max-content;
+    will-change: transform;
+  }
+  .polaroid-card-mobile {
+    width: 220px;
+    flex-shrink: 0;
+    background: white;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    padding: 0.75rem 0.75rem 2rem 0.75rem;
+    border-radius: 4px;
+  }
+  .polaroid-card-mobile img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+  .polaroid-card-mobile p {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: #555;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  .polaroid-desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .polaroid-sticky {
+    display: none;
+  }
+  .polaroid-scroll-wrapper {
+    height: auto;
   }
 }
 
