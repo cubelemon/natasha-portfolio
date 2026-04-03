@@ -19,7 +19,7 @@ export default function Footer({ onContactClick }) {
               onClick={(e) => { e.preventDefault(); onContactClick() }}>
               Contact
             </a>
-            <a href="/assets/Natasha_s_Resume_Sep_2025.pdf" target="_blank" rel="noreferrer"
+            <a href="/assets/home/resume.pdf" target="_blank" rel="noreferrer"
               className="footer__social--link link__hover-effect link__hover-effect--white">
               Resume
             </a>

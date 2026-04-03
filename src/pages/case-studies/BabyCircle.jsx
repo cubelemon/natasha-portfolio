@@ -97,6 +97,21 @@ export default function BabyCircle() {
       heroLogo="/assets/babycircle/babycircle_logo.svg"
     >
 
+      {/* ── Promo video (white) ──────────────────────── */}
+      <div className="bc-bg-white" style={{ padding: '3rem 2rem' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <div className="bc-yt-wrapper">
+            <iframe
+              className="bc-yt-iframe"
+              src="https://www.youtube.com/embed/YB1lPxK9M1c"
+              title="BabyCircle promo video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </div>
+
       {/* ── S1: The Brief (cream) ─────────────────────── */}
       <div className="bc-bg-cream">
         <div className="container cs-section">
@@ -301,16 +316,6 @@ export default function BabyCircle() {
         <div className="container cs-section">
           <p className="cs-section__label">The Final Design</p>
           <h2 className="cs-section__title">Three features. Three circles.</h2>
-
-          <div className="bc-yt-wrapper">
-            <iframe
-              className="bc-yt-iframe"
-              src="https://www.youtube.com/embed/YB1lPxK9M1c"
-              title="BabyCircle promo video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
 
           {FEATURES.map((feature, i) => {
             const gifOnRight = i !== 1
