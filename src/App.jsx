@@ -7,6 +7,7 @@ import Rajang from './pages/case-studies/Rajang'
 import BabyCircle from './pages/case-studies/BabyCircle'
 import Muafakat from './pages/case-studies/Muafakat'
 import MoviePlug from './pages/case-studies/MoviePlug'
+import SatuJohan from './pages/case-studies/SatuJohan'
 
 // Scroll to top on every route change
 function ScrollToTop() {
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/projects/babycircle" element={<BabyCircle />} />
         <Route path="/projects/muafakat" element={<Muafakat />} />
         <Route path="/projects/movieplug" element={<MoviePlug />} />
+        <Route path="/projects/satujohan" element={<SatuJohan />} />
       </Routes>
     </BrowserRouter>
   )

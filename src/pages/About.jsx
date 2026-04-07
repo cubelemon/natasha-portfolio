@@ -20,24 +20,6 @@ const TOOLS = [
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg', name: 'Photoshop' },
 ]
 
-const POLAROIDS = [
-  {
-    img: '/assets/about/suede-1.png',
-    caption: 'Running industry events with SUEDE 💟',
-    rotate: '2deg',
-  },
-  {
-    img: '/assets/about/suede-2.png',
-    caption: 'Connecting designers with the industry ⭐️',
-    rotate: '-1.5deg',
-  },
-  {
-    img: '/assets/about/life-outside.png',
-    caption: 'Life outside the screen 🌿',
-    rotate: '3deg',
-  },
-]
-
 const SIDE_QUESTS = [
   {
     img: '/assets/about/muaythai.png',
@@ -60,7 +42,6 @@ export default function About() {
   const [modalOpen, setModalOpen] = useState(false)
   const [galleryOffset, setGalleryOffset] = useState(0)
   const galleryRef = useRef(null)
-  const polaroidRowRef = useRef(null)
   const stickyRef = useRef(null)
 
   useEffect(() => {
@@ -246,6 +227,16 @@ export default function About() {
                     <img src={card.img} alt={card.caption} className="sq-card__img" />
                   </div>
                   <p className="sq-card__caption">{card.caption}</p>
+                  {card.img === '/assets/about/muaythai.png' && (
+                    <div style={{ padding: '0 1rem 1rem' }}>
+                      <a href="/projects/satujohan" style={{ display: 'block', textAlign: 'center', background: '#0c9590', color: 'white', fontWeight: 700, fontSize: 12, textDecoration: 'none', padding: '8px 14px', borderRadius: '999px', letterSpacing: '0.03em', transition: 'background 300ms ease' }}
+                        onMouseEnter={e => e.currentTarget.style.background = '#097a75'}
+                        onMouseLeave={e => e.currentTarget.style.background = '#0c9590'}
+                      >
+                        See how this inspired a project →
+                      </a>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

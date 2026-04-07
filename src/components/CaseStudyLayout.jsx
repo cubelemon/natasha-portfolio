@@ -5,12 +5,13 @@ import Footer from './Footer'
 import ContactModal from './ContactModal'
 
 const NEXT_PROJECTS = {
-  herculabs: { slug: 'rajang',      title: 'Rajang',      subtitle: 'A Website Revamp with a Twist',    path: '/projects/rajang' },
-  rajang:    { slug: 'babycircle',  title: 'BabyCircle',  subtitle: 'A Parental Support App',           path: '/projects/babycircle' },
-  babycircle:{ slug: 'herculabs',   title: 'Herculabs',   subtitle: 'A VR Olympic Simulator Booth',     path: '/projects/herculabs' },
+  herculabs:  { slug: 'rajang',     title: 'Rajang',     subtitle: 'A Website Revamp with a Twist',          path: '/projects/rajang' },
+  rajang:     { slug: 'babycircle', title: 'BabyCircle', subtitle: 'A Parental Support App',                 path: '/projects/babycircle' },
+  babycircle: { slug: 'satujohan',  title: 'Satu Johan', subtitle: 'A Chocolate Artefact for ONE Champion',  path: '/projects/satujohan' },
+  satujohan:  { slug: 'herculabs',  title: 'Herculabs',  subtitle: 'A VR Olympic Simulator Booth',           path: '/projects/herculabs' },
 }
 
-export default function CaseStudyLayout({ children, heroTag, heroTitle, heroSubtitle, meta, coverImg, coverAlt, customHero, pageClass, slug, heroLogo }) {
+export default function CaseStudyLayout({ children, heroTag, heroTitle, heroSubtitle, meta, coverImg, coverAlt, customHero, pageClass, slug, heroLogo, hideHero }) {
   const [modalOpen, setModalOpen] = useState(false)
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export default function CaseStudyLayout({ children, heroTag, heroTitle, heroSubt
       <div style={{ background: 'white', minHeight: '100vh', position: 'relative', zIndex: 1 }}>
         <div className={`case-study-page${pageClass ? ` ${pageClass}` : ''}`}>
           {/* Hero */}
-          <div className="case-study-hero">
+          {!hideHero && <div className="case-study-hero">
             <Link to="/" className="case-study-hero__back">
               ← Back to Projects
             </Link>
@@ -76,10 +77,10 @@ export default function CaseStudyLayout({ children, heroTag, heroTitle, heroSubt
                 )}
               </>
             )}
-          </div>
+          </div>}
 
           {/* Cover image */}
-          {coverImg && (
+          {!hideHero && coverImg && (
             <div className="case-study-cover">
               <img src={coverImg} alt={coverAlt || heroTitle} />
             </div>

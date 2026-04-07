@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -140,7 +140,7 @@ function FileCard() {
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false)
-  const backgroundRef = useRef(null)
+
 
   useEffect(() => {
     if (modalOpen) {
@@ -219,9 +219,13 @@ export default function Home() {
       <section id="projects">
         <div className="container">
           <div className="row">
-            <h1 className="section__title">
-              Here are some of my <span className="text--orange">Projects</span>
-            </h1>
+            <div style={{ marginBottom: '2rem' }}>
+              <p style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#0c9590', marginBottom: '0.5rem' }}>Selected Work</p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', fontWeight: 900, color: '#051616', marginBottom: '0.75rem', lineHeight: 1.1 }}>Product & UX/UI Design</h2>
+              <p style={{ fontSize: '1rem', color: '#777', maxWidth: 600, lineHeight: 1.7, marginBottom: 0 }}>
+                These are my main product and UX/UI design projects, where I led end-to-end design from research through to prototype.
+              </p>
+            </div>
             <div className="projects__grid">
               {/* Featured — BabyCircle */}
               <Link
@@ -306,6 +310,39 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Beyond UX */}
+      <section style={{ padding: '4rem 2rem', background: 'white' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ marginBottom: '2rem' }}>
+            <p style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#0c9590', marginBottom: '0.5rem' }}>Beyond UX</p>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', fontWeight: 900, color: '#051616', marginBottom: '0.75rem' }}>Other work I am proud of</h2>
+            <p style={{ fontSize: '1rem', color: '#777', maxWidth: 600, lineHeight: 1.7 }}>
+              Not everything I make is a UX project. This is where I get to show the rest: 3D design, physical prototyping, and the projects that remind me why I love making things.
+            </p>
+          </div>
+
+          <a href="/projects/satujohan" style={{ textDecoration: 'none' }}>
+            <div
+              style={{ display: 'flex', gap: '2.5rem', alignItems: 'center', background: '#faf7f2', borderRadius: '1.5rem', padding: '2rem', cursor: 'pointer', transition: 'transform 300ms ease, box-shadow 300ms ease', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.12)' }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.06)' }}
+            >
+              <div style={{ width: 200, height: 160, borderRadius: '1rem', overflow: 'hidden', flexShrink: 0, background: '#e0e0e0' }}>
+                <img src="/assets/satujohan/cover.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Satu Johan" />
+              </div>
+              <div>
+                <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#0c9590', marginBottom: '0.5rem' }}>3D Design & Physical Prototyping</p>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#051616', marginBottom: '0.5rem' }}>Satu Johan</h3>
+                <p style={{ fontSize: '0.95rem', color: '#666', lineHeight: 1.6, marginBottom: '1rem' }}>
+                  A chocolate artefact celebrating Malaysia's ONE Championship Muay Thai fighter, Johan Ghazali. Built in Fusion 360, laser cut, and rendered in Blender.
+                </p>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#0c9590' }}>View project →</span>
+              </div>
+            </div>
+          </a>
         </div>
       </section>
 
