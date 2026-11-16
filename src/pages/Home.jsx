@@ -1,3 +1,4 @@
+import ProjectTooltip from '../components/ProjectTooltip'
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -209,10 +210,15 @@ export default function Home() {
       </section>
 
       {/* Design philosophy */}
-      <section id="design-philosophy">
-        <p className="callout__title">
-          I treat every design as unfinished: <span className="callout__accent">never perfect, always evolving.</span> The next step in innovation happens when we build with users, not just for them.
-        </p>
+      <section id="design-philosophy" aria-labelledby="philosophy-title">
+        <div className="philosophy__inner">
+          <p className="philosophy__label">How I think</p>
+          <h2 id="philosophy-title" className="philosophy__title">
+            <span>Never perfect</span>
+            <span className="philosophy__accent">Always evolving</span>
+          </h2>
+          <p className="philosophy__body">I treat every design as unfinished<br />The next step happens when we build with users, not just for them</p>
+        </div>
       </section>
 
       {/* Projects */}
@@ -223,25 +229,19 @@ export default function Home() {
               <p style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#0c9590', marginBottom: '0.5rem' }}>Selected Work</p>
               <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', fontWeight: 900, color: '#051616', marginBottom: '0.75rem', lineHeight: 1.1 }}>Product & UX/UI Design</h2>
               <p style={{ fontSize: '1rem', color: '#777', maxWidth: 600, lineHeight: 1.7, marginBottom: 0 }}>
-                These are my main product and UX/UI design projects, where I led end-to-end design from research through to prototype.
+                Selected projects in product design, UX/UI, and data storytelling, from research and exploration through to interactive experiences.
               </p>
             </div>
             <div className="projects__grid">
               {/* Featured — BabyCircle */}
               <Link
                 to="/projects/babycircle"
+                aria-describedby="babycircle-tooltip"
                 className="pg-card pg-card--featured project-card"
                 style={{ backgroundImage: "url('/assets/home/babycircle_cover.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#e8f4f3' }}
               >
                 <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 30% 50%, rgba(12,149,144,0.3) 0%, transparent 60%), linear-gradient(to top, #e8f4f3 40%, rgba(232,244,243,0.7) 100%)', zIndex: 0 }} />
-                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '85%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', textAlign: 'center', opacity: 0, pointerEvents: 'none', zIndex: 2, transition: 'opacity 300ms ease' }} className="pg-card__hover-overlay">
-                  <p style={{ fontSize: '1rem', fontWeight: 700, lineHeight: 1.4, color: '#051616', margin: 0 }}>For when you need someone who thinks in systems</p>
-                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-                    {['UX Research', 'Design Systems', 'Mobile App'].map(t => (
-                      <span key={t} style={{ borderRadius: '999px', padding: '4px 12px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.05em', background: 'rgba(5,22,22,0.1)', color: '#051616', border: '1px solid rgba(5,22,22,0.25)' }}>{t}</span>
-                    ))}
-                  </div>
-                </div>
+                <ProjectTooltip id="babycircle-tooltip">For when you need someone who builds systems a team can use</ProjectTooltip>
                 <div className="pg-card__content" style={{ position: 'relative', zIndex: 1 }}>
                   <div className="pg-pills card-pills">
                     {['UX Design', 'Design Systems', 'Figma', 'User Research'].map(t => (
@@ -254,22 +254,35 @@ export default function Home() {
                 </div>
               </Link>
 
+              {/* Featured — Olympics data story */}
+              <Link
+                to="/projects/olympics-fair"
+                aria-describedby="olympics-fair-tooltip"
+                className="pg-card pg-card--featured pg-card--olympics project-card"
+              >
+                <ProjectTooltip id="olympics-fair-tooltip">For when you need someone who turns data into insights</ProjectTooltip>
+                <div className="pg-card__content" style={{ position: 'relative', zIndex: 1 }}>
+                  <div className="pg-pills card-pills">
+                    {['Data Visualisation', 'Data Storytelling', 'D3.js', 'Usability Testing'].map(t => (
+                      <span key={t} className="pg-pill of-featured-pill">{t}</span>
+                    ))}
+                  </div>
+                  <h2 className="pg-title pg-title--featured" style={{ color: '#ffffff' }}>Is the Olympics Fair?</h2>
+                  <p className="pg-desc" style={{ color: 'rgba(255,255,255,0.8)' }}>An interactive story about wealth, opportunity, and who gets a chance to win</p>
+                  <p className="pg-meta" style={{ color: 'rgba(255,255,255,0.6)' }}>Data Visualisation&nbsp;&nbsp;·&nbsp;&nbsp;University of Sydney · 2026</p>
+                </div>
+              </Link>
+
               {/* Bottom row */}
               <div className="projects__bottom-row">
                 <Link
                   to="/projects/herculabs"
+                aria-describedby="herculabs-tooltip"
                   className="pg-card pg-card--light project-card"
                   style={{ backgroundImage: "url('/assets/home/Herculabs_cover.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #f5f5f0 40%, rgba(245,245,240,0.6) 100%)', zIndex: 0 }} />
-                  <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '85%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', textAlign: 'center', opacity: 0, pointerEvents: 'none', zIndex: 2, transition: 'opacity 300ms ease' }} className="pg-card__hover-overlay">
-                    <p style={{ fontSize: '1rem', fontWeight: 700, lineHeight: 1.4, color: 'white', margin: 0 }}>For when you need a researcher who goes beyond the screen</p>
-                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-                      {['UX Research', 'Interaction Design', 'Prototyping'].map(t => (
-                        <span key={t} style={{ borderRadius: '999px', padding: '4px 12px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.05em', background: 'rgba(255,255,255,0.15)', color: 'white', border: '1px solid rgba(255,255,255,0.3)' }}>{t}</span>
-                      ))}
-                    </div>
-                  </div>
+                  <ProjectTooltip id="herculabs-tooltip">For when you need a researcher who looks beyond what people say</ProjectTooltip>
                   <div className="pg-card__content" style={{ position: 'relative', zIndex: 1 }}>
                     <div className="pg-pills card-pills">
                       {['UX Design', 'Interaction Design', 'Figma'].map(t => (
@@ -284,18 +297,12 @@ export default function Home() {
 
                 <Link
                   to="/projects/rajang"
+                aria-describedby="rajang-tooltip"
                   className="pg-card pg-card--dark project-card"
                   style={{ backgroundImage: "url('/assets/home/Rajang_cover.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0a0a0a 40%, rgba(10,10,10,0.7) 100%)', zIndex: 0 }} />
-                  <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '85%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', textAlign: 'center', opacity: 0, pointerEvents: 'none', zIndex: 2, transition: 'opacity 300ms ease' }} className="pg-card__hover-overlay">
-                    <p style={{ fontSize: '1rem', fontWeight: 700, lineHeight: 1.4, color: 'white', margin: 0 }}>For when you need a designer who gets content strategy</p>
-                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-                      {['Content Design', 'Web Design', 'SEO'].map(t => (
-                        <span key={t} style={{ borderRadius: '999px', padding: '4px 12px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.05em', background: 'rgba(255,255,255,0.15)', color: 'white', border: '1px solid rgba(255,255,255,0.3)' }}>{t}</span>
-                      ))}
-                    </div>
-                  </div>
+                  <ProjectTooltip id="rajang-tooltip">For when you need a designer who makes content work harder</ProjectTooltip>
                   <div className="pg-card__content" style={{ position: 'relative', zIndex: 1 }}>
                     <div className="pg-pills card-pills">
                       {['Web Design', 'Content Design', 'SEO', 'Wix'].map(t => (
@@ -314,6 +321,7 @@ export default function Home() {
       </section>
 
       {/* Beyond UX */}
+
       <section style={{ padding: '4rem 2rem', background: 'white' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ marginBottom: '2rem' }}>
@@ -324,7 +332,8 @@ export default function Home() {
             </p>
           </div>
 
-          <a href="/projects/satujohan" style={{ textDecoration: 'none' }}>
+          <Link to="/projects/satujohan" className="project-card project-card--satu" aria-describedby="satujohan-tooltip" style={{ textDecoration: 'none', display: 'block', position: 'relative' }}>
+            <ProjectTooltip id="satujohan-tooltip">For when you need a maker who brings ideas into the real world</ProjectTooltip>
             <div
               style={{ display: 'flex', gap: '2.5rem', alignItems: 'center', background: '#faf7f2', borderRadius: '1.5rem', padding: '2rem', cursor: 'pointer', transition: 'transform 300ms ease, box-shadow 300ms ease', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.12)' }}
@@ -342,7 +351,7 @@ export default function Home() {
                 <span style={{ fontSize: 13, fontWeight: 700, color: '#0c9590' }}>View project →</span>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -352,7 +361,7 @@ export default function Home() {
         <p className="about-teaser__text">
           Curious to learn more about me, my journey, and what drives my design work?
         </p>
-        <Link to="/about" className="about-teaser__link">Check out my About page →</Link>
+        <Link to="/about" className="about-teaser__link">Check out my About page <span aria-hidden="true">→</span></Link>
       </section>
 
       <Footer onContactClick={() => setModalOpen(true)} />

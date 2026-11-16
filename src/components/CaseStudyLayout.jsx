@@ -7,7 +7,8 @@ import ContactModal from './ContactModal'
 const NEXT_PROJECTS = {
   herculabs:  { slug: 'rajang',     title: 'Rajang',     subtitle: 'A Website Revamp with a Twist',          path: '/projects/rajang' },
   rajang:     { slug: 'babycircle', title: 'BabyCircle', subtitle: 'A Parental Support App',                 path: '/projects/babycircle' },
-  babycircle: { slug: 'satujohan',  title: 'Satu Johan', subtitle: 'A Chocolate Artefact for ONE Champion',  path: '/projects/satujohan' },
+  babycircle: { slug: 'olympics-fair', title: 'Is the Olympics Actually Fair?', subtitle: 'Turning Data into Insights', path: '/projects/olympics-fair' },
+  'olympics-fair': { slug: 'satujohan', title: 'Satu Johan', subtitle: 'A Chocolate Artefact for ONE Champion', path: '/projects/satujohan' },
   satujohan:  { slug: 'herculabs',  title: 'Herculabs',  subtitle: 'A VR Olympic Simulator Booth',           path: '/projects/herculabs' },
 }
 

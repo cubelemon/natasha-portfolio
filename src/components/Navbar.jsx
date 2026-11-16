@@ -18,7 +18,7 @@ export default function Navbar({ onContactClick }) {
   }
 
   return (
-    <nav>
+    <nav className="glass-nav" aria-label="Main navigation">
       <ul className="nav__link--list">
         <li>
           <figure>
