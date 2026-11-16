@@ -5039,3 +5039,41 @@ Small phone
 .project-card:focus-visible .card-pills { opacity: 0.15; }
 @media (hover: none) { .project-card:hover:not(:focus-visible) .project-tooltip { opacity: 0; visibility: hidden; } }
 @media (prefers-reduced-motion: reduce) { .project-tooltip { transition: none; } }
+
+/* A more personal, purposeful first screen. */
+.home-hero__intro { font-size: 1.1rem; font-weight: 550; color: #345c57; margin-bottom: 1.25rem; }
+.home-hero__title { font-size: clamp(2.3rem, 4.1vw, 3.55rem); letter-spacing: -0.055em; line-height: 1.14; }
+.home-hero__title span { color: #087d78; }
+.home-hero__para { font-size: 1.05rem; color: #48605b; line-height: 1.8; margin-top: 1.25rem; margin-bottom: 1.5rem; }
+.home-hero__cta { display: inline-flex; gap: 1rem; align-items: center; justify-content: center; padding: 0.9rem 1.4rem; min-height: 48px; border-radius: 999px; background: #084448; color: white; font-size: 0.9rem; font-weight: 700; transition: background 180ms ease; }
+.home-hero__cta:hover { background: #0b5d63; }
+.home-hero__cta:focus-visible { outline: 3px solid #084448; outline-offset: 4px; }
+.home-hero__left .social__list { margin-top: 1.5rem; }
+.portrait-drag { position: relative; transform: translate(var(--portrait-x, 0px), var(--portrait-y, 0px)) rotate(var(--portrait-tilt, 0deg)); transition: transform 180ms ease-out; user-select: none; cursor: grab; }
+.portrait-drag--active { transition: none; cursor: grabbing; }
+.portrait-drag img { -webkit-user-drag: none; }
+.portrait-drag__hint { position: absolute; top: -2.3rem; right: -1rem; padding: 0.4rem 0.8rem; border-radius: 999px; background: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.9); color: #345c57; font-size: 0.7rem; letter-spacing: 0.02em; transform: rotate(7deg); pointer-events: none; }
+.portrait-drag--active * { cursor: grabbing !important; }
+.portrait-drag [role="button"]:focus-visible { outline: 3px solid #087d78; outline-offset: 6px; border-radius: 1.25rem; }
+@media (pointer: coarse) { .portrait-drag__hint { display: none; } }
+@media (max-width: 768px) { .home-hero__title { font-size: clamp(2rem, 6.5vw, 3.2rem); } }
+@media (prefers-reduced-motion: reduce) { .portrait-drag, .portrait-drag * { transition: none !important; } html { scroll-behavior: auto; } }
+
+/* A macOS image document, built around the original portrait. */
+.mac-file { display: flex; flex-direction: column; align-items: center; gap: 1rem; background: none; border: 0; padding: 12px; cursor: grab; font: inherit; border-radius: 1rem; -webkit-tap-highlight-color: transparent; }
+.mac-file__paper { position: relative; display: flex; flex-direction: column; justify-content: center; width: 270px; height: 325px; padding: 50px 18px 43px; background: linear-gradient(145deg,#fff 25%,#eef0f3); border-radius: 8px; clip-path: polygon(0 0, 80% 0, 100% 17%, 100% 100%, 0 100%); filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1)); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.9); }
+.mac-file { filter: drop-shadow(0 14px 20px rgba(24,54,51,0.17)); }
+.mac-file__fold { position: absolute; top: 0; right: 0; width: 54px; height: 55px; background: linear-gradient(135deg,#dce0e6,#f6f7f9); border-radius: 0 0 0 7px; box-shadow: -2px 3px 5px rgba(0,0,0,0.12); }
+.mac-file__paper img { width: 100%; height: 190px; object-fit: cover; border: 1px solid #d6dade; border-radius: 2px; }
+.mac-file__format { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: #7b8795; font-size: 21px; font-weight: 750; letter-spacing: 0.03em; }
+.mac-file__name { display: inline-block; padding: 4px 10px; border-radius: 6px; color: #193b38; font-size: 15px; font-weight: 550; letter-spacing: -0.02em; text-shadow: 0 1px 3px rgba(255,255,255,0.85); }
+.mac-file:hover .mac-file__name, .mac-file:focus-visible .mac-file__name { background: #2667d6; color: white; text-shadow: none; }
+.mac-file:focus-visible { outline: 2px solid #2667d6; outline-offset: 3px; }
+.mac-file__note { text-align: center; font-size: 0.75rem; color: #45645e; margin-top: 0.4rem; }
+.portrait-preview { position: fixed; inset: 0; margin: auto; padding: 0; width: min(850px, calc(100vw - 32px)); max-height: 90vh; border: 1px solid #d5d5d5; border-radius: 12px; background: #f1f1f1; box-shadow: 0 30px 100px rgba(0,0,0,0.3); }
+.portrait-preview::backdrop { background: rgba(10,25,24,0.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.portrait-preview__bar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 12px 16px; font-size: 0.85rem; font-weight: 600; color: #34413f; }
+.portrait-preview__bar button { font: inherit; cursor: pointer; border: 0; background: #dedede; color: #333; border-radius: 50%; width: 32px; height: 32px; }
+.portrait-preview > img { display: block; width: 100%; max-height: calc(90vh - 56px); object-fit: contain; }
+.home-hero__title { font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 900; color: #051616; line-height: 1.1; letter-spacing: -0.04em; }
+@media (max-width: 768px) { .home-hero__title { font-size: clamp(2.4rem, 8vw, 3.5rem); } }

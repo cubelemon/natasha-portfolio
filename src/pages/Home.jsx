@@ -1,140 +1,31 @@
 import ProjectTooltip from '../components/ProjectTooltip'
+import DraggablePortrait from '../components/DraggablePortrait'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ContactModal from '../components/ContactModal'
 
-const META_ROWS = [
-  { label: 'Kind',     value: 'UX Designer' },
-  { label: 'Size',     value: '3 internships, 1 degree' },
-  { label: 'Created',  value: 'Sarawak, Malaysia' },
-  { label: 'Modified', value: 'Sydney, Australia' },
-]
-
-const CHECKER_BG = {
-  backgroundImage: `
-    linear-gradient(45deg, #e0e0e0 25%, transparent 25%),
-    linear-gradient(-45deg, #e0e0e0 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #e0e0e0 75%),
-    linear-gradient(-45deg, transparent 75%, #e0e0e0 75%)
-  `,
-  backgroundSize: '12px 12px',
-  backgroundPosition: '0 0, 0 6px, 6px -6px, -6px 0px',
-  backgroundColor: '#f5f5f5',
-}
-
 function FileCard() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    function check() { setIsMobile(window.innerWidth <= 768) }
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
-
-  const hintStyle = { fontSize: '12px', color: '#aaa', textAlign: 'center', marginTop: '0.75rem', display: 'block', cursor: isOpen ? 'pointer' : 'default' }
-
-  if (isMobile) {
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div
-          onClick={() => setIsOpen(o => !o)}
-          style={{
-            width: '300px',
-            minHeight: '420px',
-            height: isOpen ? '580px' : 'auto',
-            background: 'white',
-            borderRadius: '1.25rem',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.15)',
-            padding: '1.25rem 1.25rem 1.5rem',
-            cursor: 'pointer',
-            transition: 'height 400ms ease',
-            overflow: 'hidden',
-            position: 'relative',
-          }}
-        >
-          <div style={{ display: 'flex', gap: '6px' }}>
-            {['#ff5f57', '#ffbd2e', '#28c840'].map(c => (
-              <div key={c} style={{ width: 12, height: 12, borderRadius: '50%', background: c }} />
-            ))}
-          </div>
-          <div style={{ height: isOpen ? '360px' : '200px', width: '100%', borderRadius: '0.75rem', overflow: 'hidden', marginTop: '2rem', transition: 'height 400ms ease', ...CHECKER_BG }}>
-            <img src="/assets/home/me_cutout.png" alt="Natasha" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
-          </div>
-          <p style={{ fontSize: '1rem', fontWeight: 700, color: isOpen ? '#0c9590' : '#051616', marginTop: '1rem', transition: 'color 300ms ease' }}>
-            {isOpen ? 'Now open ✓' : 'Natasha.png'}
-          </p>
-          <div style={{ opacity: isOpen ? 0 : 1, height: isOpen ? 0 : 'auto', overflow: 'hidden', transition: 'opacity 300ms ease' }}>
-            {META_ROWS.map(({ label, value }) => (
-              <p key={label} style={{ fontSize: '12px', color: '#777', lineHeight: 1.8, margin: 0 }}>
-                <span style={{ fontFamily: 'monospace', color: '#aaa', display: 'inline-block', width: '70px' }}>{label}</span>
-                {value}
-              </p>
-            ))}
-            <span style={{ background: '#fff0f0', color: '#e74c3c', border: '1px solid #ffcccc', borderRadius: '999px', padding: '3px 10px', fontSize: '11px', fontWeight: 600, marginTop: '1rem', display: 'inline-block' }}>⚠ no jpeg please</span>
-          </div>
-        </div>
-        <span
-          style={hintStyle}
-          onClick={isOpen ? (e) => { e.stopPropagation(); setIsOpen(false) } : undefined}
-        >
-          {isOpen ? '✕ close' : 'tap to expand ↕'}
-        </span>
-      </div>
-    )
-  }
-
-  // Desktop — 3D flip
+  const preview = useRef(null)
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <div style={{ perspective: '1000px', width: '300px', height: '460px' }}>
-        <div
-          onClick={() => setIsOpen(o => !o)}
-          style={{
-            transformStyle: 'preserve-3d',
-            transition: 'transform 0.6s ease',
-            transform: isOpen ? 'rotateY(180deg)' : 'rotateY(0deg)',
-            position: 'relative', width: '100%', height: '100%', cursor: 'pointer',
-          }}
-        >
-          {/* FRONT */}
-          <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', background: 'white', borderRadius: '1.25rem', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', padding: '1.25rem 1.25rem 2rem', overflow: 'hidden' }}>
-            <div style={{ display: 'flex', gap: '6px' }}>
-              {['#ff5f57', '#ffbd2e', '#28c840'].map(c => (
-                <div key={c} style={{ width: 12, height: 12, borderRadius: '50%', background: c }} />
-              ))}
-            </div>
-            <div style={{ height: '200px', width: '100%', borderRadius: '0.75rem', overflow: 'hidden', marginTop: '2rem', ...CHECKER_BG }}>
-              <img src="/assets/home/me_cutout.png" alt="Natasha" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
-            </div>
-            <p style={{ fontSize: '1rem', fontWeight: 700, color: '#051616', marginTop: '1rem' }}>Natasha.png</p>
-            <div>
-              {META_ROWS.map(({ label, value }) => (
-                <p key={label} style={{ fontSize: '12px', color: '#777', lineHeight: 1.8, margin: 0 }}>
-                  <span style={{ fontFamily: 'monospace', color: '#aaa', display: 'inline-block', width: '70px' }}>{label}</span>
-                  {value}
-                </p>
-              ))}
-            </div>
-            <span style={{ background: '#fff0f0', color: '#e74c3c', border: '1px solid #ffcccc', borderRadius: '999px', padding: '3px 10px', fontSize: '11px', fontWeight: 600, marginTop: '1rem', marginBottom: '0.5rem', display: 'inline-block' }}>⚠ no jpeg please</span>
-          </div>
-          {/* BACK — transparent cutout only */}
-          <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: 'transparent', boxShadow: 'none', overflow: 'hidden' }}>
-            <img src="/assets/home/me_cutout.png" alt="Natasha" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', background: 'transparent' }} />
-          </div>
-        </div>
-      </div>
-      <span
-        style={hintStyle}
-        onClick={isOpen ? (e) => { e.stopPropagation(); setIsOpen(false) } : undefined}
-      >
-        {isOpen ? '✕ close' : 'click to open ↩'}
-      </span>
-    </div>
+    <>
+      <DraggablePortrait>
+        <button className="mac-file" type="button" onClick={() => preview.current.showModal()} aria-label="Preview Natasha.png">
+          <span className="mac-file__paper">
+            <span className="mac-file__fold" aria-hidden="true" />
+            <img src="/assets/home/natasha-desktop.jpg" alt="Natasha smiling with her hand in her hair" draggable="false" />
+            <span className="mac-file__format" aria-hidden="true">PNG</span>
+          </span>
+          <span className="mac-file__name">Natasha.png</span>
+        </button>
+      </DraggablePortrait>
+      <dialog className="portrait-preview" ref={preview} onClick={event => { if (event.target === event.currentTarget) preview.current.close() }}>
+        <div className="portrait-preview__bar"><span>Natasha.png</span><button type="button" onClick={() => preview.current.close()} aria-label="Close photo preview" autoFocus>✕</button></div>
+        <img src="/assets/home/natasha-desktop.jpg" alt="Natasha’s portrait" />
+      </dialog>
+    </>
   )
 }
 
@@ -175,10 +66,8 @@ export default function Home() {
             <div className="home-hero__left hero-left">
               <p className="home-hero__label">UX Designer · Sydney, Australia</p>
               <h1 className="home-hero__title">Hey, I'm Natasha Png</h1>
-              <p className="home-hero__para">
-                A User Experience Designer based in Sydney, Australia.
-                And yes that is my surname (no jpeg please!)
-              </p>
+              <p className="home-hero__para">A User Experience Designer based in Sydney, Australia. And yes that is my surname (no jpeg please!)</p>
+              <a href="#projects" className="home-hero__cta">Explore my work <span aria-hidden="true">↓</span></a>
               <div className="social__list">
                 <a href="https://www.linkedin.com/in/natasha-p-ng-9a0a41269/" target="_blank" rel="noreferrer" className="social__link click">
                   <i className="fab fa-linkedin-in"></i>
@@ -190,9 +79,7 @@ export default function Home() {
                   <i className="fas fa-file-pdf"></i>
                 </a>
               </div>
-              <a href="#projects" className="scroll">
-                <div className="scroll__icon click"></div>
-              </a>
+
             </div>
 
             {/* RIGHT */}
